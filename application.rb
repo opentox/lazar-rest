@@ -1,5 +1,7 @@
 include OpenTox
 
+require 'rack/cors'
+
 # add CORS support for swagger
 use Rack::Cors do |config|
   config.allow do |allow|
