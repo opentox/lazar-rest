@@ -108,6 +108,31 @@
                     }
                 }
             }
+        },
+        "/api/api.json": {
+            "get": {
+                "tags": [
+                    "api"
+                ],
+                "description": "Get swagger api in JSON",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
         }
     },
     "parameters": {
@@ -143,6 +168,10 @@
         {
             "name": "model",
             "description": "Lazar Model Service"
+        },
+        {
+            "name": "api",
+            "description": "Swagger API representation in JSON"
         }
     ]
 }
