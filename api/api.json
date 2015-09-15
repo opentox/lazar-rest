@@ -1,0 +1,148 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "An REST Webservice for lazar\n",
+        "version": "0.0.1",
+        "title": "Lazar REST Service",
+        "contact": {
+            "name": "in silico toxicology",
+            "email": "service@in-silico.ch"
+        },
+        "license": {
+            "name": "GNU GENERAL PUBLIC LICENSE",
+            "url": "https://github.com/opentox/lazar-rest/blob/master/LICENSE"
+        }
+    },
+    "host": "mr-test.in-silico.ch",
+    "basePath": "/",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/model": {
+            "get": {
+                "tags": [
+                    "model"
+                ],
+                "description": "Get a list of all prediction models",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    }
+                ],
+                "produces": [
+                    "text/uri-list",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        },
+        "/model/{id}": {
+            "post": {
+                "tags": [
+                    "model"
+                ],
+                "description": "Predict a compound",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "body Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/plain"
+                        ]
+                    },
+                    {
+                        "name": "compound",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/modelid"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "modelid": {
+            "name": "id",
+            "in": "path",
+            "description": "model id",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "responses": {
+        "200": {
+            "description": "OK"
+        },
+        "202": {
+            "description": "Accepted"
+        },
+        "400": {
+            "description": "Bad Request"
+        },
+        "401": {
+            "description": "Unauthorized"
+        },
+        "404": {
+            "description": "Resource Not Found"
+        },
+        "500": {
+            "description": "Server Error"
+        }
+    },
+    "tags": [
+        {
+            "name": "model",
+            "description": "Lazar Model Service"
+        }
+    ]
+}
