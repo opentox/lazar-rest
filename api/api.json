@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "An REST Webservice for lazar\n",
+        "description": "REST Webservice for lazar\n",
         "version": "0.0.1",
         "title": "Lazar REST Service",
         "contact": {
