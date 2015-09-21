@@ -1,6 +1,7 @@
 include OpenTox
 
 require 'rack/cors'
+#require_relative "helper.rb"
 
 # add CORS support for swagger
 use Rack::Cors do |config|
@@ -35,5 +36,29 @@ get "/model/?" do
   case @accept
   when "text/uri-list"
     return uri_list.join("\n") + "\n"
+  else
+    bad_request_error "Mime type #{@accept} is not supported."
   end
+end
+
+get "/model/:id/?" do
+  @model = OpenTox::Model::Lazar.find params[:id]
+  return @model.to_json
+end
+
+post "/model/?" do
+  parse_input
+  case @content_type
+  when "text/csv", "text/comma-separated-values"
+    model = OpenTox::Model::Prediction.from_csv_file @body
+  else
+    bad_request_error "Mime type #{@content_type} is not supported."
+  end
+  response['Content-Type'] = "text/uri-list"
+  model.model_id
+end
+
+delete "model/:id/?" do
+  model = OpenTox::Model::Lazar.find params[:id]
+  model.delete
 end
