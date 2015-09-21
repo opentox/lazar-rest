@@ -46,6 +46,24 @@ get "/model/:id/?" do
   return @model.to_json
 end
 
+
+
+post "/model/:id/?" do
+  @identifier = params[:identifier]
+  begin
+    # get compound from SMILES
+    compound = Compound.from_smiles @identifier
+  rescue
+    @error_report = "Attention, '#{params[:identifier]}' is not a valid SMILES string."
+    return @error_report
+  end
+  model = OpenTox::Model::Lazar.find params[:id]
+  prediction = model.predict(compound)
+  return prediction.to_json
+end
+
+
+=begin
 post "/model/?" do
   parse_input
   case @content_type
@@ -62,3 +80,4 @@ delete "model/:id/?" do
   model = OpenTox::Model::Lazar.find params[:id]
   model.delete
 end
+=end
