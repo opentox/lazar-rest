@@ -59,7 +59,8 @@
                         "$ref": "#/responses/500"
                     }
                 }
-            },
+            }
+        },
         "/model/{id}": {
             "get": {
                 "tags": [
@@ -153,8 +154,7 @@
                         "$ref": "#/responses/404"
                     }
                 }
-            },
-
+            }
         },
         "/api/api.json": {
             "get": {
