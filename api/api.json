@@ -154,6 +154,8 @@
                     }
                 }
             },
+
+        },
         "/api/api.json": {
             "get": {
                 "tags": [
@@ -184,13 +186,6 @@
             "description": "model id",
             "required": true,
             "type": "string"
-        },
-        "file": {
-            "name": "file",
-            "in": "formData",
-            "description": "datafile",
-            "required": true,
-            "type": "file"
         }
     },
     "responses": {
