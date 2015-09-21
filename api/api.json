@@ -112,7 +112,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "body Content-Type",
+                        "description": "Content-Type",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -121,11 +121,10 @@
                     },
                     {
                         "name": "identifier",
-                        "in": "body",
+                        "in": "header",
+                        "description": "SMILES identifier",
                         "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/modelid"
