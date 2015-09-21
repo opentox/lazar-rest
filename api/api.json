@@ -110,16 +110,6 @@
                 "description": "Predict a compound",
                 "parameters": [
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/plain"
-                        ]
-                    },
-                    {
                         "name": "identifier",
                         "in": "header",
                         "description": "SMILES identifier",
@@ -132,9 +122,6 @@
                 ],
                 "produces": [
                     "application/json"
-                ],
-                "consumes": [
-                    "text/plain"
                 ],
                 "responses": {
                     "200": {
