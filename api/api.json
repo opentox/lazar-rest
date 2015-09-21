@@ -59,6 +59,47 @@
                         "$ref": "#/responses/500"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "model"
+                ],
+                "description": "Create a new model resource",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/csv"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/file"
+                    }
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "text/uri-list"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
             }
         },
         "/model/{id}": {
@@ -154,6 +195,37 @@
                         "$ref": "#/responses/404"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "model"
+                ],
+                "description": "Delete a resource",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/modelid"
+                    }
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
             }
         },
         "/api/api.json": {
@@ -186,6 +258,13 @@
             "description": "model id",
             "required": true,
             "type": "string"
+        },
+        "file": {
+            "name": "file",
+            "in": "formData",
+            "description": "datafile",
+            "required": true,
+            "type": "file"
         }
     },
     "responses": {
