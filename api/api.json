@@ -111,7 +111,7 @@
                 "parameters": [
                     {
                         "name": "identifier",
-                        "in": "header",
+                        "in": "formData",
                         "description": "SMILES identifier",
                         "required": true,
                         "type": "string"
