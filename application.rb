@@ -74,6 +74,17 @@ post "/model/:id/?" do
   return prediction.to_json
 end
 
+# Get a list of all descriptors
+# @param [Header] Accept one of text/plain, application/json
+# @return [text/plain, application/json] list of all prediction models
+get "/algorithm/descriptor/?" do
+  case @accept
+  when "text/plain"
+    return OpenTox::Algorithm::Descriptor::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"}
+  when "application/json"
+    return JSON.pretty_generate OpenTox::Algorithm::Descriptor::DESCRIPTORS
+  end
+end
 
 =begin
 post "/model/?" do
