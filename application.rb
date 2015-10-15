@@ -74,33 +74,18 @@ post "/model/:id/?" do
   return prediction.to_json
 end
 
-# Get a list of all descriptors
+# Get a list of a single or all descriptors
 # @param [Header] Accept one of text/plain, application/json
+# @param [Path] Descriptor name (e.G.: Openbabel.HBA1)
 # @return [text/plain, application/json] list of all prediction models
-get "/algorithm/descriptor/?" do
+get "/algorithm/descriptor/?:descriptor?" do
   case @accept
-  when "text/plain"
-    return OpenTox::Algorithm::Descriptor::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"}
   when "application/json"
-    return JSON.pretty_generate OpenTox::Algorithm::Descriptor::DESCRIPTORS
-  end
-end
-
-=begin
-post "/model/?" do
-  parse_input
-  case @content_type
-  when "text/csv", "text/comma-separated-values"
-    model = OpenTox::Model::Prediction.from_csv_file @body
+    return "#{JSON.pretty_generate OpenTox::Algorithm::Descriptor::DESCRIPTORS} "  unless params[:descriptor]
+    return {params[:descriptor] => OpenTox::Algorithm::Descriptor.description(params[:descriptor])}.to_json
   else
-    bad_request_error "Mime type #{@content_type} is not supported."
+    return OpenTox::Algorithm::Descriptor::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"} unless params[:descriptor]
+    return OpenTox::Algorithm::Descriptor.description  params[:descriptor]
   end
-  response['Content-Type'] = "text/uri-list"
-  model.model_id
 end
 
-delete "model/:id/?" do
-  model = OpenTox::Model::Lazar.find params[:id]
-  model.delete
-end
-=end
