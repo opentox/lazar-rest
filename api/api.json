@@ -185,6 +185,56 @@
                 }
             }
         },
+        "/algorithm/descriptor/{descriptor}": {
+            "get": {
+                "tags": [
+                    "algorithm",
+                    "descriptor"
+                ],
+                "description": "Get a list of a single or all descriptors",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/plain",
+                            "application/json"
+                        ]
+                    },
+                    {
+                        "name": "descriptor",
+                        "in": "path",
+                        "description": "descriptor",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        },
         "/api/api.json": {
             "get": {
                 "tags": [
