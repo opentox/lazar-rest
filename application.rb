@@ -89,3 +89,28 @@ get "/algorithm/descriptor/?:descriptor?" do
   end
 end
 
+get %r{/compound/(.+)} do |inchi|
+  inchi = "InChI=#{inchi}" unless inchi.match(/^InChI/)
+  compound = OpenTox::Compound.from_inchi inchi
+  response['Content-Type'] = @accept
+  case @accept
+  when "application/json"
+    return compound.to_json
+  when "chemical/x-daylight-smiles"
+    return compound.smiles
+  when "chemical/x-inchi"
+    return compound.inchi
+  when "chemical/x-mdl-sdfile"
+    return compound.sdf
+  when "chemical/x-mdl-molfile"
+  when "image/png"
+    return compound.png
+  when "image/svg+xml"
+    return compound.svg
+  when "text/plain"
+    return "#{compound.names}\n"
+  else
+    return compound.inspect
+  end
+end
+
