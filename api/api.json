@@ -235,6 +235,54 @@
                 }
             }
         },
+        "/compound/{InChI}": {
+            "get": {
+                "tags": [
+                    "compound"
+                ],
+                "description": "Get compound representation",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/InChI"
+                    },
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "application/json",
+                            "chemical/x-daylight-smiles",
+                            "chemical/x-inchi",
+                            "chemical/x-mdl-sdfile",
+                            "chemical/x-mdl-molfile",
+                            "image/png",
+                            "image/svg+xml",
+                            "text/plain"
+                        ]
+                    }
+                ],
+                "produces": [
+                    "application/json",
+                    "chemical/x-daylight-smiles",
+                    "chemical/x-inchi",
+                    "chemical/x-mdl-sdfile",
+                    "chemical/x-mdl-molfile",
+                    "image/png",
+                    "image/svg+xml",
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    }
+                }
+            }
+        },
         "/api/api.json": {
             "get": {
                 "tags": [
@@ -263,6 +311,13 @@
             "name": "id",
             "in": "path",
             "description": "model id",
+            "required": true,
+            "type": "string"
+        },
+        "InChI": {
+            "name": "InChI",
+            "in": "path",
+            "description": "InChI String",
             "required": true,
             "type": "string"
         }
@@ -303,6 +358,10 @@
         {
             "name": "model",
             "description": "Lazar Model Service"
+        },
+        {
+            "name": "compound",
+            "description": "Compound"
         }
     ]
 }
