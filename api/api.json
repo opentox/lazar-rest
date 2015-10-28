@@ -183,6 +183,64 @@
                         "$ref": "#/responses/500"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "algorithm",
+                    "descriptor"
+                ],
+                "description": "Calculate desriptors for compounds",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/plain",
+                            "application/json"
+                        ]
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "CSV file of compounds",
+                        "required": true,
+                        "type": "file"
+                    },
+                    {
+                        "name": "descriptor",
+                        "in": "formData",
+                        "description": "array of descriptors",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "produces": [
+                    "text/plain",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
             }
         },
         "/algorithm/descriptor/{descriptor}": {
