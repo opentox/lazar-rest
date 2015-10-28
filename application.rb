@@ -89,13 +89,29 @@ get "/algorithm/descriptor/?:descriptor?" do
   end
 end
 
+post "/algorithm/descriptor/?" do
+  bad_request_error "Missing Parameter " unless params[:file] or params[:descriptor]
+  descriptor = params['descriptor'].split(',')
+  dataset = OpenTox::Dataset.from_csv_file params[:file][:tempfile]
+  d = Algorithm::Descriptor.physchem dataset, descriptor
+  case @accept
+  when "application/csv"
+    return d.to_csv
+  when "application/json"
+    lines=CSV.parse(d.to_csv)
+    keys = lines.delete lines.first
+    data = lines.collect{|values|Hash[keys.zip(values)]}
+    return JSON.pretty_generate(data)
+  end
+end
+
 get %r{/compound/(.+)} do |inchi|
-  inchi = "InChI=#{inchi}" unless inchi.match(/^InChI/)
+  bad_request_error "Input parameter #{inchi} is not an InChI" unless inchi.match(/^InChI=/)
   compound = OpenTox::Compound.from_inchi inchi
   response['Content-Type'] = @accept
   case @accept
   when "application/json"
-    return compound.to_json
+    return JSON.pretty_generate JSON.parse(compound.to_json)
   when "chemical/x-daylight-smiles"
     return compound.smiles
   when "chemical/x-inchi"
