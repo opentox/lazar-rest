@@ -189,7 +189,7 @@
                     "algorithm",
                     "descriptor"
                 ],
-                "description": "Calculate desriptors for compounds",
+                "description": "Calculate desriptors for single compound or an array of compounds <br> <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"accept:application/json\" -F \"file=@../lazar/test/data/batch_prediction.csv;type=application/csv\" -F \"descriptor=Openbabel.HBA1,Openbabel.HBA2,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor</pre>",
                 "parameters": [
                     {
                         "name": "accept",
@@ -221,7 +221,7 @@
                     }
                 ],
                 "produces": [
-                    "text/plain",
+                    "application/csv",
                     "application/json"
                 ],
                 "responses": {
