@@ -189,7 +189,7 @@
                     "algorithm",
                     "descriptor"
                 ],
-                "description": "Calculate desriptors for single compound or an array of compounds <br> <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"accept:application/json\" -F \"file=@../lazar/test/data/batch_prediction.csv;type=application/csv\" -F \"descriptor=Openbabel.HBA1,Openbabel.HBA2,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor</pre>",
+                "description": "Calculate descriptors for a single compound as SMILES string or a CSV compound file <br> <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"accept:application/json\" -F \"file=@../lazar/test/data/batch_prediction.csv;type=application/csv\" -F \"descriptor=Openbabel.HBA1,Openbabel.HBA2,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor curl -Lk -X POST -i  -H \"accept:application/json\" -F \"identifier=O=C1NC(=O)NC=C1\" -F \"descriptor=Openbabel.MW,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor </pre> CSV compound file has to be comma separated with SMILES strings in the first column.",
                 "parameters": [
                     {
                         "name": "accept",
@@ -206,8 +206,15 @@
                         "name": "file",
                         "in": "formData",
                         "description": "CSV file of compounds",
-                        "required": true,
+                        "required": false,
                         "type": "file"
+                    },
+                    {
+                        "name": "identifier",
+                        "in": "formData",
+                        "description": "SMILES identifier",
+                        "required": false,
+                        "type": "string"
                     },
                     {
                         "name": "descriptor",
