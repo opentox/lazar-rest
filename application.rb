@@ -90,15 +90,21 @@ get "/algorithm/descriptor/?:descriptor?" do
 end
 
 post "/algorithm/descriptor/?" do
-  bad_request_error "Missing Parameter " unless params[:file] or params[:descriptor]
+  bad_request_error "Missing Parameter " unless (params[:identifier] or params[:file]) and params[:descriptor]
   descriptor = params['descriptor'].split(',')
-  dataset = OpenTox::Dataset.from_csv_file params[:file][:tempfile]
-  d = Algorithm::Descriptor.physchem dataset, descriptor
+  if params[:file]
+    data = OpenTox::Dataset.from_csv_file params[:file][:tempfile]
+  else
+    data = OpenTox::Compound.from_smiles params[:identifier]
+  end
+  d = Algorithm::Descriptor.physchem data, descriptor
+  csv = d.to_csv
+  csv = "SMILES,#{params[:descriptor]}\n#{params[:identifier]},#{csv}" if params[:identifier]
   case @accept
   when "application/csv"
-    return d.to_csv
+    return csv
   when "application/json"
-    lines=CSV.parse(d.to_csv)
+    lines = CSV.parse(csv)
     keys = lines.delete lines.first
     data = lines.collect{|values|Hash[keys.zip(values)]}
     return JSON.pretty_generate(data)
