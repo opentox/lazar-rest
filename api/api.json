@@ -5,8 +5,9 @@
         "version": "0.0.1",
         "title": "Lazar REST Service",
         "contact": {
-            "name": "in silico toxicology",
-            "email": "service@in-silico.ch"
+            "name": "in silico toxicology gmbh",
+            "email": "service@in-silico.ch",
+            "url": "www.in-silico.ch"
         },
         "license": {
             "name": "GNU GENERAL PUBLIC LICENSE",
@@ -189,6 +190,7 @@
                     "algorithm",
                     "descriptor"
                 ],
+                "summary": "Descriptor calculation",
                 "description": "Calculate descriptors for a single compound as SMILES string or a CSV compound file <br> <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"accept:application/json\" -F \"file=@../lazar/test/data/batch_prediction.csv;type=application/csv\" -F \"descriptor=Openbabel.HBA1,Openbabel.HBA2,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor curl -Lk -X POST -i  -H \"accept:application/json\" -F \"identifier=O=C1NC(=O)NC=C1\" -F \"descriptor=Openbabel.MW,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor </pre> CSV compound file has to be comma separated with SMILES strings in the first column.",
                 "parameters": [
                     {
