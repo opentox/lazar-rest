@@ -14,22 +14,4 @@ class ModelTest < MiniTest::Test
     end
   end
 
-  # create a model
-  def test_02_create
-    file = "../../lazar/test/data/hamster_carcinogenicity.csv"
-    res = OpenTox::RestClientWrapper.post $model_uri, {:file => File.open(file)}, {:content_type => "text/csv"}
-    assert_equal res.code, 200
-    @@model = res
-  end
-
-  def test_90_delete
-    res = OpenTox::RestClientWrapper.delete @@model
-    assert_equal res.code, 200
-    assert_raises OpenTox::NotFoundError do
-      res = OpenTox::RestClientWrapper.get @@model, {}, {:accept => "application/json"}
-    end
-
-  end
-
-
 end

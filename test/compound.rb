@@ -1,12 +1,12 @@
 require_relative "setup.rb"
 
 $compound_uri = "https://mr-test.in-silico.ch/compound"
-$compound = ["1S/C6H6/c1-2-4-6-5-3-1/h1-6H"]
+$compound = ["InChI=1S/C6H6/c1-2-4-6-5-3-1/h1-6H"]
 
 class CompoundTest < MiniTest::Test
 
   def test_00_get_inchi
-    res = RestClientWrapper.get File.join($compound_uri, $compound[0]), {}, {:accept => "chemical/x-inchi"}
+    res = RestClientWrapper.get File.join($compound_uri, $compound[0]), {}, {:accept => 'chemical/x-inchi'}
     assert_equal res.code, 200
     assert_equal res, "InChI=1S/C6H6/c1-2-4-6-5-3-1/h1-6H"
   end
@@ -38,9 +38,10 @@ class CompoundTest < MiniTest::Test
   def test_05_get_json
     res = RestClientWrapper.get File.join($compound_uri, $compound[0]), {}, {:accept => "application/json"}
     assert_equal res.code, 200
-    assert res.include?("{\"_id\":{\"$oid\":")
     js = JSON.parse res
     assert_equal js["chemblid"], "CHEMBL581676"
+    assert_equal js["names"].first, "BENZENE"
+    assert_equal js["names"][6], "71-43-2"
   end
 
   def test_06_get_names
