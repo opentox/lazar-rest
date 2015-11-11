@@ -20,7 +20,7 @@ class CompoundTest < MiniTest::Test
   def test_02_get_sdf
     res = RestClientWrapper.get File.join($compound_uri, $compound[0]), {}, {:accept => "chemical/x-mdl-sdfile"}
     assert_equal res.code, 200
-    assert res.include?("OpenBabel10191511303D")
+    assert res.include?("  6 12  1  0  0  0  0\nM  END\n$$$")
   end
 
   def test_03_get_png
