@@ -113,7 +113,7 @@ end
 
 get %r{/compound/(.+)} do |inchi|
   bad_request_error "Input parameter #{inchi} is not an InChI" unless inchi.match(/^InChI=/)
-  compound = OpenTox::Compound.from_inchi inchi
+  compound = OpenTox::Compound.from_inchi URI.unescape(inchi)
   response['Content-Type'] = @accept
   case @accept
   when "application/json"
