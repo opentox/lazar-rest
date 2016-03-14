@@ -61,10 +61,10 @@ end
 
 
 post "/model/:id/?" do
-  identifier = params[:identifier]
+  identifier = params[:identifier].split(",")
   begin
     # get compound from SMILES
-    compound = Compound.from_smiles identifier
+    compound = identifier.collect{ |i| Compound.from_smiles i.strip }
   rescue
     @error_report = "Attention, '#{params[:identifier]}' is not a valid SMILES string."
     return @error_report

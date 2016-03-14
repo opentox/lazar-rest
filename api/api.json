@@ -113,7 +113,7 @@
                     {
                         "name": "identifier",
                         "in": "formData",
-                        "description": "SMILES identifier",
+                        "description": "SMILES identifier or comma seperated list of SMILES identifiers",
                         "required": true,
                         "type": "string"
                     },
