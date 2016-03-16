@@ -1,7 +1,8 @@
 include OpenTox
 
 require 'rack/cors'
-#require_relative "helper.rb"
+
+set :show_exceptions => false
 
 # add CORS support for swagger
 use Rack::Cors do |config|
