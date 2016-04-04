@@ -143,10 +143,10 @@
                 }
             }
         },
-        "/algorithm/descriptor": {
+        "/compound/descriptor": {
             "get": {
                 "tags": [
-                    "algorithm",
+                    "compound",
                     "descriptor"
                 ],
                 "description": "Get a list of all descriptors",
@@ -252,10 +252,10 @@
                 }
             }
         },
-        "/algorithm/descriptor/{descriptor}": {
+        "/compound/descriptor/{descriptor}": {
             "get": {
                 "tags": [
-                    "algorithm",
+                    "compound",
                     "descriptor"
                 ],
                 "description": "Get a list of a single or all descriptors",
