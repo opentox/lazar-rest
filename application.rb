@@ -83,18 +83,18 @@ end
 # @param [Header] Accept one of text/plain, application/json
 # @param [Path] Descriptor name (e.G.: Openbabel.HBA1)
 # @return [text/plain, application/json] list of all prediction models
-get "/algorithm/descriptor/?:descriptor?" do
+get "/compound/descriptor/?:descriptor?" do
   case @accept
   when "application/json"
-    return "#{JSON.pretty_generate OpenTox::Algorithm::Descriptor::DESCRIPTORS} "  unless params[:descriptor]
-    return {params[:descriptor] => OpenTox::Algorithm::Descriptor.description(params[:descriptor])}.to_json
+    return "#{JSON.pretty_generate OpenTox::PhysChem::DESCRIPTORS} "  unless params[:descriptor]
+    return {params[:descriptor] => OpenTox::PhysChem::DESCRIPTORS[params[:descriptor]]}.to_json
   else
-    return OpenTox::Algorithm::Descriptor::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"} unless params[:descriptor]
-    return OpenTox::Algorithm::Descriptor.description  params[:descriptor]
+    return OpenTox::PhysChem::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"} unless params[:descriptor]
+    return OpenTox::PhysChem::DESCRIPTORS[params[:descriptor]]
   end
 end
 
-post "/algorithm/descriptor/?" do
+post "/compound/descriptor/?" do
   bad_request_error "Missing Parameter " unless (params[:identifier] or params[:file]) and params[:descriptor]
   descriptor = params['descriptor'].split(',')
   if params[:file]
