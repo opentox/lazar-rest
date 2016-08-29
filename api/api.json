@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "REST Webservice for lazar\n",
+        "description": "REST Webservice for lazar and nano-lazar\n",
         "version": "0.0.1",
-        "title": "Lazar REST Service",
+        "title": "Lazar & Nano-Lazar REST Service",
         "contact": {
             "name": "in silico toxicology gmbh",
             "email": "service@in-silico.ch",
@@ -140,6 +140,92 @@
                     "404": {
                         "$ref": "#/responses/404"
                     }
+                }
+            }
+        },
+        "/validation": {
+            "get": {
+                "tags": [
+                    "validation"
+                ],
+                "description": "Get a list of all validation types",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    }
+                ],
+                "produces": [
+                    "text/uri-list",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        },
+        "/validation/{validationtype}/{id}": {
+            "tags": [
+                "model"
+            ],
+            "description": "Get model representation",
+            "parameters": [
+                {
+                    "name": "Content-Type",
+                    "in": "header",
+                    "description": "body Content-Type",
+                    "required": true,
+                    "type": "string",
+                    "enum": [
+                        "application/json"
+                    ]
+                },
+                {
+                    "$ref": "#/parameters/valtype"
+                },
+                {
+                    "$ref": "#/parameters/modelid"
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/responses/200"
+                },
+                "400": {
+                    "$ref": "#/responses/400"
+                },
+                "401": {
+                    "$ref": "#/responses/401"
+                },
+                "403": {
+                    "$ref": "#/responses/403"
+                },
+                "404": {
+                    "$ref": "#/responses/404"
                 }
             }
         },
@@ -387,6 +473,13 @@
             "description": "InChI String",
             "required": true,
             "type": "string"
+        },
+        "valtype": {
+            "name": "validationtype",
+            "in": "path",
+            "description": "validation type",
+            "required": true,
+            "type": "string"
         }
     },
     "responses": {
@@ -429,6 +522,10 @@
         {
             "name": "compound",
             "description": "Compound"
+        },
+        {
+            "name": "validation",
+            "description": "Validation"
         }
     ]
 }

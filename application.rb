@@ -81,6 +81,62 @@ post "/model/:id/?" do
   return batch.to_json
 end
 
+VALIDATION_TYPES = ["repeatedcrossvalidation", "leaveoneout", "crossvalidation", "regressioncrossvalidation"]
+
+# Get a list of all validations 
+# @param [Header] Accept one of text/uri-list, application/json
+# @param [Path] Validationtype One of "repeatedcrossvalidation", "leaveoneout", "crossvalidation", "regressioncrossvalidation"
+# @return [text/uri-list] list of all prediction models
+get "/validation/:validationtype/?" do
+  bad_request_error "There is no such validation type as: #{params[:validationtype]}" unless VALIDATION_TYPES.include? params[:validationtype]
+  case params[:validationtype]
+  when "repeatedcrossvalidation"
+    validations = OpenTox::Validation::RepeatedCrossValidation.all
+  when "leaveoneout"
+    validations = OpenTox::Validation::LeaveOneOut.all
+  when "crossvalidation"
+    validations = OpenTox::Validation::CrossValidation.all
+  when "regressioncrossvalidation"
+    validations = OpenTox::Validation::RegressionCrossValidation.all
+  end
+
+  case @accept
+  when "text/uri-list"
+    uri_list = validations.collect{|validation| uri("/validation/#{params[:validationtype]}/#{validation.id}")}
+    return uri_list.join("\n") + "\n"
+  when "application/json"
+    validations = JSON.parse validations.to_json
+    validations.each_index do |idx|
+      validations[idx][:URI] = uri("/validation/#{params[:validationtype]}/#{validations[idx]["$oid"]}")
+      #models[idx][:crossvalidation_uri] = uri("/crossvalidation/#{models[idx]["crossvalidation_id"]["$oid"]}") if models[idx]["crossvalidation_id"]
+    end
+    return validations.to_json
+  else
+    bad_request_error "Mime type #{@accept} is not supported."
+  end
+end
+
+get "/validation/:validationtype/:id/?" do
+  bad_request_error "There is no such validation type as: #{params[:validationtype]}" unless VALIDATION_TYPES.include? params[:validationtype]
+  case params[:validationtype]
+  when "repeatedcrossvalidation"
+    validation = OpenTox::Validation::RepeatedCrossValidation.find params[:id]
+  when "leaveoneout"
+    validation = OpenTox::Validation::LeaveOneOut.find params[:id]
+  when "crossvalidation"
+    validation = OpenTox::Validation::CrossValidation.find params[:id]
+  when "regressioncrossvalidation"
+    validation = OpenTox::Validation::RegressionCrossValidation.find params[:id]
+  end
+
+  resource_not_found_error "#{params[:validationtype]} with id: #{params[:id]} not found." unless validation
+  #model[:URI] = uri("/model/#{model.id}")
+  #model[:neighbor_algorithm_parameters][:feature_dataset_uri] = uri("/dataset/#{model[:neighbor_algorithm_parameters][:feature_dataset_id]}") if model[:neighbor_algorithm_parameters][:feature_dataset_id]
+  #model[:training_dataset_uri] = uri("/dataset/#{model.training_dataset_id}") if model.training_dataset_id
+  #model[:prediction_feature_uri] = uri("/dataset/#{model.prediction_feature_id}") if model.prediction_feature_id
+  return validation.to_json
+end
+
 # Get a list of a single or all descriptors
 # @param [Header] Accept one of text/plain, application/json
 # @param [Path] Descriptor name (e.G.: Openbabel.HBA1)
