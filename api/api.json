@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "REST Webservice for lazar and nano-lazar\n",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "title": "Lazar & Nano-Lazar REST Service",
         "contact": {
             "name": "in silico toxicology gmbh",
@@ -186,46 +186,38 @@
             }
         },
         "/validation/{validationtype}/{id}": {
-            "tags": [
-                "model"
-            ],
-            "description": "Get model representation",
-            "parameters": [
-                {
-                    "name": "Content-Type",
-                    "in": "header",
-                    "description": "body Content-Type",
-                    "required": true,
-                    "type": "string",
-                    "enum": [
-                        "application/json"
-                    ]
-                },
-                {
-                    "$ref": "#/parameters/valtype"
-                },
-                {
-                    "$ref": "#/parameters/modelid"
-                }
-            ],
-            "produces": [
-                "application/json"
-            ],
-            "responses": {
-                "200": {
-                    "$ref": "#/responses/200"
-                },
-                "400": {
-                    "$ref": "#/responses/400"
-                },
-                "401": {
-                    "$ref": "#/responses/401"
-                },
-                "403": {
-                    "$ref": "#/responses/403"
-                },
-                "404": {
-                    "$ref": "#/responses/404"
+            "get": {
+                "tags": [
+                    "validation"
+                ],
+                "description": "Get Validation representation",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/valtype"
+                    },
+                    {
+                        "$ref": "#/parameters/modelid"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
                 }
             }
         },
