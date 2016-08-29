@@ -83,10 +83,27 @@ end
 
 VALIDATION_TYPES = ["repeatedcrossvalidation", "leaveoneout", "crossvalidation", "regressioncrossvalidation"]
 
+
+# Get a list of ayll possible validation types
+# @param [Header] Accept one of text/uri-list, application/json
+# @return [text/uri-list] URI list of all validation types
+get "/validation/?" do
+  case @accept
+  when "text/uri-list"
+    uri_list = VALIDATION_TYPES.collect{|validationtype| uri("/validation/#{validationtype}")}
+    return uri_list.join("\n") + "\n"
+  when "application/json"
+    return VALIDATION_TYPES.to_json
+  else
+    bad_request_error "Mime type #{@accept} is not supported."
+  end
+end
+
+
 # Get a list of all validations 
 # @param [Header] Accept one of text/uri-list, application/json
 # @param [Path] Validationtype One of "repeatedcrossvalidation", "leaveoneout", "crossvalidation", "regressioncrossvalidation"
-# @return [text/uri-list] list of all prediction models
+# @return [text/uri-list] list of all validations of a validation type
 get "/validation/:validationtype/?" do
   bad_request_error "There is no such validation type as: #{params[:validationtype]}" unless VALIDATION_TYPES.include? params[:validationtype]
   case params[:validationtype]
