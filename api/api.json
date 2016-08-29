@@ -80,7 +80,7 @@
                         ]
                     },
                     {
-                        "$ref": "#/parameters/modelid"
+                        "$ref": "#/parameters/id"
                     }
                 ],
                 "produces": [
@@ -118,7 +118,7 @@
                         "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/modelid"
+                        "$ref": "#/parameters/id"
                     }
                 ],
                 "produces": [
@@ -185,6 +185,51 @@
                 }
             }
         },
+        "/validation/{validationtype}": {
+            "get": {
+                "tags": [
+                    "validation"
+                ],
+                "description": "Get all validations of a validation type",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/valtype"
+                    }
+                ],
+                "produces": [
+                    "text/uri-list",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
+            }
+        },
         "/validation/{validationtype}/{id}": {
             "get": {
                 "tags": [
@@ -193,13 +238,25 @@
                 "description": "Get Validation representation",
                 "parameters": [
                     {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    },
+                    {
                         "$ref": "#/parameters/valtype"
                     },
                     {
-                        "$ref": "#/parameters/modelid"
+                        "$ref": "#/parameters/id"
                     }
                 ],
                 "produces": [
+                    "text/uri-list",
                     "application/json"
                 ],
                 "responses": {
@@ -452,10 +509,10 @@
         }
     },
     "parameters": {
-        "modelid": {
+        "id": {
             "name": "id",
             "in": "path",
-            "description": "model id",
+            "description": "id",
             "required": true,
             "type": "string"
         },
