@@ -143,6 +143,147 @@
                 }
             }
         },
+        "/dataset": {
+            "get": {
+                "tags": [
+                    "dataset"
+                ],
+                "description": "Get a list of all datasets",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    }
+                ],
+                "produces": [
+                    "text/uri-list",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        },
+        "/dataset/{id}": {
+            "get": {
+                "tags": [
+                    "dataset"
+                ],
+                "description": "Get dataset representation",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "body Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "application/json"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/id"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
+            }
+        },
+        "/dataset/{id}/{attribute}": {
+            "get": {
+                "tags": [
+                    "dataset"
+                ],
+                "description": "Get dataset representation",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "body Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "application/json"
+                        ]
+                    },
+                    {
+                        "name": "attribute",
+                        "in": "path",
+                        "description": "requested attribute",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "compounds",
+                            "nanoparticles",
+                            "substances",
+                            "features"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/id"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
+            }
+        },
         "/validation": {
             "get": {
                 "tags": [
@@ -569,6 +710,10 @@
         {
             "name": "compound",
             "description": "Compound"
+        },
+        {
+            "name": "dataset",
+            "description": "Dataset"
         },
         {
             "name": "validation",

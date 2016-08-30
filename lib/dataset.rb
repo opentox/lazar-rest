@@ -1,6 +1,4 @@
-include OpenTox
-
-# route to swagger API file
+# Get all datasets
 get "/dataset/?" do
   datasets = OpenTox::Dataset.all
   case @accept
@@ -18,7 +16,7 @@ get "/dataset/?" do
   end
 end
 
-
+# Get a dataset
 get "/dataset/:id/?" do
   dataset = Dataset.find :id => params[:id]
   resource_not_found_error "Dataset with id: #{params[:id]} not found." unless dataset
@@ -28,19 +26,12 @@ get "/dataset/:id/?" do
   return dataset.to_json
 end
 
-
+# Get a dataset attribute. One of compounds, nanoparticles, substances, features 
 get "/dataset/:id/:attribute/?" do
   dataset = Dataset.find :id => params[:id]
   resource_not_found_error "Dataset with id: #{params[:id]} not found." unless dataset
   attribs = ["compounds", "nanoparticles", "substances", "features"]
-  bad_request_error "Attribute #{params[:attribute]} is not availabe. Choose one of #{attribs.join(', ')}" unless attribs.include? params[:attribute]
+  return "Attribute '#{params[:attribute]}' is not available. Choose one of #{attribs.join(', ')}." unless attribs.include? params[:attribute]
   out = dataset.send(params[:attribute])
   return out.to_json
 end
-
-
-# d = OpenTox::Dataset.find :id => "57c446d13c58a77ec9baaecf"
-# d.data_entries
-# d.name d.source
-# OpenTox::Substance.find :id => "57c446d23c58a77ec9baaed8"
-# OpenTox::Feature.find :id => "57c446d53c58a77ec9bab236"
