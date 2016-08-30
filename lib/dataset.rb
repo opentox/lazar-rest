@@ -11,13 +11,31 @@ get "/dataset/?" do
     datasets = JSON.parse datasets.to_json
     datasets.each_index do |idx|
       datasets[idx][:URI] = uri("/dataset/#{datasets[idx]["_id"]["$oid"]}")
-      #models[idx][:crossvalidation_uri] = uri("/crossvalidation/#{models[idx]["crossvalidation_id"]["$oid"]}") if models[idx]["crossvalidation_id"]
     end
-    return models.to_json
+    return datasets.to_json
   else
     bad_request_error "Mime type #{@accept} is not supported."
   end
+end
 
+
+get "/dataset/:id/?" do
+  dataset = Dataset.find :id => params[:id]
+  resource_not_found_error "Dataset with id: #{params[:id]} not found." unless dataset
+  dataset[:URI] = uri("/dataset/#{dataset.id}")
+  dataset[:substances] = uri("/dataset/#{dataset.id}/substances")
+  dataset[:features] = uri("/dataset/#{dataset.id}/features")
+  return dataset.to_json
+end
+
+
+get "/dataset/:id/:attribute/?" do
+  dataset = Dataset.find :id => params[:id]
+  resource_not_found_error "Dataset with id: #{params[:id]} not found." unless dataset
+  attribs = ["compounds", "nanoparticles", "substances", "features"]
+  bad_request_error "Attribute #{params[:attribute]} is not availabe. Choose one of #{attribs.join(', ')}" unless attribs.include? params[:attribute]
+  out = dataset.send(params[:attribute])
+  return out.to_json
 end
 
 
