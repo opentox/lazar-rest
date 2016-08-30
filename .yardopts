@@ -1,0 +1,5 @@
+--readme README.md
+--title 'REST servive for Lazar'
+--charset utf-8
+--plugin yard-sinatra
+yardoc  lib/*.rb - README.md ChangeLog VERSION LICENSE

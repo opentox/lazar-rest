@@ -235,7 +235,7 @@
                 "tags": [
                     "validation"
                 ],
-                "description": "Get Validation representation",
+                "description": "Get validation representation",
                 "parameters": [
                     {
                         "name": "accept",
@@ -244,7 +244,6 @@
                         "required": true,
                         "type": "string",
                         "enum": [
-                            "text/uri-list",
                             "application/json"
                         ]
                     },
@@ -256,7 +255,6 @@
                     }
                 ],
                 "produces": [
-                    "text/uri-list",
                     "application/json"
                 ],
                 "responses": {

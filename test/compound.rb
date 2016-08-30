@@ -1,6 +1,6 @@
 require_relative "setup.rb"
 
-$compound_uri = "https://mr-test.in-silico.ch/compound"
+$compound_uri = "#{$host}/compound"
 $compound = ["InChI=1S/C6H6/c1-2-4-6-5-3-1/h1-6H"]
 
 class CompoundTest < MiniTest::Test

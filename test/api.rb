@@ -1,5 +1,5 @@
 require_relative "setup.rb"
-$api_uri = "https://mr-test.in-silico.ch/api/api.json"
+$api_uri = "#{$host}/api/api.json"
 
 
 class ApiTest < MiniTest::Test

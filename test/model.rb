@@ -1,6 +1,6 @@
 require_relative "setup.rb"
 
-$model_uri = "https://mr-test.in-silico.ch/model"
+$model_uri = "#{$host}/model"
 class ModelTest < MiniTest::Test
 
   def test_00_get_urilist

@@ -1,6 +1,6 @@
 require_relative "setup.rb"
 
-$host = "https://mr-test.in-silico.ch"
+$host = "#{$host}"
 
 
 class DescriptorTest < MiniTest::Test
