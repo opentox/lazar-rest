@@ -20,6 +20,10 @@ end
 get "/dataset/:id/?" do
   dataset = Dataset.find :id => params[:id]
   resource_not_found_error "Dataset with id: #{params[:id]} not found." unless dataset
+  dataset.data_entries.each do |k, v|
+    dataset.data_entries[k][:URI] = uri("/substance/#{k}")
+  end
+
   dataset[:URI] = uri("/dataset/#{dataset.id}")
   dataset[:substances] = uri("/dataset/#{dataset.id}/substances")
   dataset[:features] = uri("/dataset/#{dataset.id}/features")
