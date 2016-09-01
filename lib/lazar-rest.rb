@@ -24,5 +24,6 @@ end
   "compound.rb",
   "dataset.rb",
   "model.rb",
+  "substance.rb",
   "validation.rb"
 ].each{ |f| require_relative f }
