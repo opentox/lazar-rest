@@ -1,6 +1,9 @@
+require "sinatra"
+require "../lazar/lib/lazar.rb"
 include OpenTox
 
 require 'rack/cors'
+
 
 set :show_exceptions => false
 
