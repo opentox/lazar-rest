@@ -369,6 +369,91 @@
                 }
             }
         },
+        "/feature": {
+            "get": {
+                "tags": [
+                    "feature"
+                ],
+                "description": "Get a list of all features",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    }
+                ],
+                "produces": [
+                    "text/uri-list",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        },
+        "/feature/{id}": {
+            "get": {
+                "tags": [
+                    "feature"
+                ],
+                "description": "Get feature representation",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "body Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "application/json"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/id"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
+            }
+        },
         "/validation": {
             "get": {
                 "tags": [
@@ -807,6 +892,10 @@
         {
             "name": "substance",
             "description": "Substance"
+        },
+        {
+            "name": "feature",
+            "description": "Feature"
         }
     ]
 }

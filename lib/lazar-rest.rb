@@ -26,6 +26,7 @@ end
   "api.rb",
   "compound.rb",
   "dataset.rb",
+  "feature.rb",
   "model.rb",
   "substance.rb",
   "validation.rb"
