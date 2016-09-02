@@ -28,6 +28,7 @@ end
   "dataset.rb",
   "feature.rb",
   "model.rb",
+  "nanoparticle.rb",
   "substance.rb",
   "validation.rb"
 ].each{ |f| require_relative f }
