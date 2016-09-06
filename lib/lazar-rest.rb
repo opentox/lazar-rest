@@ -23,6 +23,7 @@ before do
 end
 
 [
+  "aa.rb",
   "api.rb",
   "compound.rb",
   "dataset.rb",
