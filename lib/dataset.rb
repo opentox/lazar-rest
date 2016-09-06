@@ -1,6 +1,6 @@
 # Get all datasets
 get "/dataset/?" do
-  datasets = OpenTox::Dataset.all
+  datasets = Dataset.all
   case @accept
   when "text/uri-list"
     uri_list = datasets.collect{|dataset| uri("/dataset/#{dataset.id}")}

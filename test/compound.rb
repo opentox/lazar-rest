@@ -39,7 +39,7 @@ class CompoundTest < MiniTest::Test
     res = RestClientWrapper.get File.join($compound_uri, $compound[0]), {}, {:accept => "application/json"}
     assert_equal res.code, 200
     js = JSON.parse res
-    assert_equal js["chemblid"], "CHEMBL581676"
+    assert_equal js["chemblid"], "CHEMBL277500"
     assert_equal js["names"].first, "BENZENE"
     assert_equal js["names"][6], "71-43-2"
   end

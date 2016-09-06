@@ -24,13 +24,13 @@ get "/validation/:validationtype/?" do
   bad_request_error "There is no such validation type as: #{params[:validationtype]}" unless VALIDATION_TYPES.include? params[:validationtype]
   case params[:validationtype]
   when "repeatedcrossvalidation"
-    validations = OpenTox::Validation::RepeatedCrossValidation.all
+    validations = Validation::RepeatedCrossValidation.all
   when "leaveoneout"
-    validations = OpenTox::Validation::LeaveOneOut.all
+    validations = Validation::LeaveOneOut.all
   when "crossvalidation"
-    validations = OpenTox::Validation::CrossValidation.all
+    validations = Validation::CrossValidation.all
   when "regressioncrossvalidation"
-    validations = OpenTox::Validation::RegressionCrossValidation.all
+    validations = Validation::RegressionCrossValidation.all
   end
 
   case @accept
@@ -53,13 +53,13 @@ get "/validation/:validationtype/:id/?" do
   bad_request_error "There is no such validation type as: #{params[:validationtype]}" unless VALIDATION_TYPES.include? params[:validationtype]
   case params[:validationtype]
   when "repeatedcrossvalidation"
-    validation = OpenTox::Validation::RepeatedCrossValidation.find params[:id]
+    validation = Validation::RepeatedCrossValidation.find params[:id]
   when "leaveoneout"
-    validation = OpenTox::Validation::LeaveOneOut.find params[:id]
+    validation = Validation::LeaveOneOut.find params[:id]
   when "crossvalidation"
-    validation = OpenTox::Validation::CrossValidation.find params[:id]
+    validation = Validation::CrossValidation.find params[:id]
   when "regressioncrossvalidation"
-    validation = OpenTox::Validation::RegressionCrossValidation.find params[:id]
+    validation = Validation::RegressionCrossValidation.find params[:id]
   end
 
   resource_not_found_error "#{params[:validationtype]} with id: #{params[:id]} not found." unless validation

@@ -14,7 +14,7 @@
             "url": "https://github.com/opentox/lazar-rest/blob/master/LICENSE"
         }
     },
-    "host": "mr-test.in-silico.ch",
+    "host": "enm.in-silico.ch",
     "basePath": "/",
     "schemes": [
         "https"
@@ -720,7 +720,7 @@
                     "descriptor"
                 ],
                 "summary": "Descriptor calculation",
-                "description": "Calculate descriptors for a single compound as SMILES string or a CSV compound file <br> <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"accept:application/json\" -F \"file=@../lazar/test/data/batch_prediction.csv;type=application/csv\" -F \"descriptor=Openbabel.HBA1,Openbabel.HBA2,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor curl -Lk -X POST -i  -H \"accept:application/json\" -F \"identifier=O=C1NC(=O)NC=C1\" -F \"descriptor=Openbabel.MW,JoeLib.LogP\" https://mr-test.in-silico.ch/algorithm/descriptor </pre> CSV compound file has to be comma separated with SMILES strings in the first column.",
+                "description": "Calculate descriptors for a single compound as SMILES string <br>  <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"accept:application/json\" -F \"identifier=O=C1NC(=O)NC=C1\" -F \"descriptor=Openbabel.MW,JoeLib.LogP\" https://enm.in-silico.ch/compound/descriptor </pre>.",
                 "parameters": [
                     {
                         "name": "accept",
@@ -734,17 +734,10 @@
                         ]
                     },
                     {
-                        "name": "file",
-                        "in": "formData",
-                        "description": "CSV file of compounds",
-                        "required": false,
-                        "type": "file"
-                    },
-                    {
                         "name": "identifier",
                         "in": "formData",
                         "description": "SMILES identifier",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
@@ -900,6 +893,84 @@
                     }
                 }
             }
+        },
+        "/aa/authenticate": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "description": "Authentication against OpenSSO. Returns token. Requires Username and Password.",
+                "operationId": "login",
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "username",
+                        "description": "username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "description": "password",
+                        "required": true,
+                        "type": "string",
+                        "format": "password"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    }
+                }
+            }
+        },
+        "/aa/logout": {
+            "post": {
+                "description": "Devalidates a token. Requires Subjectid.",
+                "operationId": "logout",
+                "tags": [
+                    "authentication"
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "subjectid",
+                        "description": "subjectid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    }
+                }
+            }
         }
     },
     "parameters": {
@@ -953,6 +1024,10 @@
         {
             "name": "api",
             "description": "Swagger API representation in JSON"
+        },
+        {
+            "name": "authentication",
+            "description": "minimal Authentication service"
         },
         {
             "name": "descriptor",

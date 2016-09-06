@@ -3,7 +3,7 @@
 # @param [Header] Accept one of text/uri-list,
 # @return [text/uri-list] list of all prediction models
 get "/model/?" do
-  models = OpenTox::Model::Prediction.all
+  models = Model::Prediction.all
   case @accept
   when "text/uri-list"
     uri_list = models.collect{|model| uri("/model/#{model.model_id}")}
@@ -21,7 +21,7 @@ get "/model/?" do
 end
 
 get "/model/:id/?" do
-  model = OpenTox::Model::Lazar.find params[:id]
+  model = Model::Lazar.find params[:id]
   resource_not_found_error "Model with id: #{params[:id]} not found." unless model
   model[:URI] = uri("/model/#{model.id}")
   model[:neighbor_algorithm_parameters][:feature_dataset_uri] = uri("/dataset/#{model[:neighbor_algorithm_parameters][:feature_dataset_id]}") if model[:neighbor_algorithm_parameters][:feature_dataset_id]
@@ -40,7 +40,7 @@ post "/model/:id/?" do
     @error_report = "Attention, '#{params[:identifier]}' is not a valid SMILES string."
     return @error_report
   end
-  model = OpenTox::Model::Lazar.find params[:id]
+  model = Model::Lazar.find params[:id]
   batch = {}
   compounds.each do |compound|
     prediction = model.predict(compound)

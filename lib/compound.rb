@@ -5,23 +5,19 @@
 get "/compound/descriptor/?:descriptor?" do
   case @accept
   when "application/json"
-    return "#{JSON.pretty_generate OpenTox::PhysChem::DESCRIPTORS} "  unless params[:descriptor]
-    return {params[:descriptor] => OpenTox::PhysChem::DESCRIPTORS[params[:descriptor]]}.to_json
+    return "#{JSON.pretty_generate PhysChem::DESCRIPTORS} "  unless params[:descriptor]
+    return {params[:descriptor] => PhysChem::DESCRIPTORS[params[:descriptor]]}.to_json
   else
-    return OpenTox::PhysChem::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"} unless params[:descriptor]
-    return OpenTox::PhysChem::DESCRIPTORS[params[:descriptor]]
+    return PhysChem::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"} unless params[:descriptor]
+    return PhysChem::DESCRIPTORS[params[:descriptor]]
   end
 end
 
 post "/compound/descriptor/?" do
-  bad_request_error "Missing Parameter " unless (params[:identifier] or params[:file]) and params[:descriptor]
+  bad_request_error "Missing Parameter " unless params[:identifier] && params[:descriptor]
   descriptor = params['descriptor'].split(',')
-  if params[:file]
-    data = OpenTox::Dataset.from_csv_file params[:file][:tempfile]
-  else
-    data = OpenTox::Compound.from_smiles params[:identifier]
-  end
-  d = Algorithm::Descriptor.physchem data, descriptor
+  compound = Compound.from_smiles params[:identifier]
+  d = compound.physchem descriptor
   csv = d.to_csv
   csv = "SMILES,#{params[:descriptor]}\n#{params[:identifier]},#{csv}" if params[:identifier]
   case @accept
@@ -37,7 +33,7 @@ end
 
 get %r{/compound/(.+)} do |inchi|
   bad_request_error "Input parameter #{inchi} is not an InChI" unless inchi.match(/^InChI=/)
-  compound = OpenTox::Compound.from_inchi URI.unescape(inchi)
+  compound = Compound.from_inchi URI.unescape(inchi)
   response['Content-Type'] = @accept
   case @accept
   when "application/json"
