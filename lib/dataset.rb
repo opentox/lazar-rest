@@ -29,7 +29,7 @@ get "/dataset/:id/?" do
     dataset[:substances] = uri("/dataset/#{dataset.id}/substances")
     dataset[:features] = uri("/dataset/#{dataset.id}/features")
     return dataset.to_json
-  when "text/csv"
+  when "text/csv", "application/csv"
     return dataset.to_csv
   else
     bad_request_error "Mime type #{@accept} is not supported."

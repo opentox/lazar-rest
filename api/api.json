@@ -70,9 +70,9 @@
                 "description": "Get model representation",
                 "parameters": [
                     {
-                        "name": "Content-Type",
+                        "name": "accept",
                         "in": "header",
-                        "description": "body Content-Type",
+                        "description": "requested Content-Type",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -193,25 +193,14 @@
                 "description": "Get dataset representation",
                 "parameters": [
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "body Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json",
-                            "text/csv"
-                        ]
-                    },
-                    {
                         "name": "accept",
                         "in": "header",
                         "description": "requested Content-Type",
                         "required": true,
                         "type": "string",
                         "enum": [
-                            "text/uri-list",
-                            "application/json"
+                            "application/json",
+                            "text/csv"
                         ]
                     },
                     {
@@ -249,9 +238,9 @@
                 "description": "Get dataset representation",
                 "parameters": [
                     {
-                        "name": "Content-Type",
+                        "name": "accept",
                         "in": "header",
-                        "description": "body Content-Type",
+                        "description": "requested Content-Type",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -347,9 +336,9 @@
                 "description": "Get substance representation",
                 "parameters": [
                     {
-                        "name": "Content-Type",
+                        "name": "accept",
                         "in": "header",
-                        "description": "body Content-Type",
+                        "description": "requested Content-Type",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -432,9 +421,9 @@
                 "description": "Get nanoparticle representation",
                 "parameters": [
                     {
-                        "name": "Content-Type",
+                        "name": "accept",
                         "in": "header",
-                        "description": "body Content-Type",
+                        "description": "requested Content-Type",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -517,9 +506,9 @@
                 "description": "Get feature representation",
                 "parameters": [
                     {
-                        "name": "Content-Type",
+                        "name": "acept",
                         "in": "header",
-                        "description": "body Content-Type",
+                        "description": "requested Content-Type",
                         "required": true,
                         "type": "string",
                         "enum": [
@@ -742,7 +731,7 @@
                         "required": true,
                         "type": "string",
                         "enum": [
-                            "application/csv",
+                            "text/csv",
                             "application/json"
                         ]
                     },
@@ -765,7 +754,7 @@
                     }
                 ],
                 "produces": [
-                    "application/csv",
+                    "text/csv",
                     "application/json"
                 ],
                 "responses": {
