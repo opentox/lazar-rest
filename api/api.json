@@ -204,6 +204,17 @@
                         ]
                     },
                     {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    },
+                    {
                         "$ref": "#/parameters/id"
                     }
                 ],
