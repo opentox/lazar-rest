@@ -199,7 +199,8 @@
                         "required": true,
                         "type": "string",
                         "enum": [
-                            "application/json"
+                            "application/json",
+                            "text/csv"
                         ]
                     },
                     {
@@ -207,7 +208,8 @@
                     }
                 ],
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "text/csv"
                 ],
                 "responses": {
                     "200": {

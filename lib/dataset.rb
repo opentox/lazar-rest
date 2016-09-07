@@ -20,14 +20,20 @@ end
 get "/dataset/:id/?" do
   dataset = Dataset.find :id => params[:id]
   resource_not_found_error "Dataset with id: #{params[:id]} not found." unless dataset
-  dataset.data_entries.each do |k, v|
-    dataset.data_entries[k][:URI] = uri("/substance/#{k}")
+  case @accept
+  when "application/json"
+    dataset.data_entries.each do |k, v|
+      dataset.data_entries[k][:URI] = uri("/substance/#{k}")
+    end
+    dataset[:URI] = uri("/dataset/#{dataset.id}")
+    dataset[:substances] = uri("/dataset/#{dataset.id}/substances")
+    dataset[:features] = uri("/dataset/#{dataset.id}/features")
+    return dataset.to_json
+  when "text/csv"
+    return dataset.to_csv
+  else
+    bad_request_error "Mime type #{@accept} is not supported."
   end
-
-  dataset[:URI] = uri("/dataset/#{dataset.id}")
-  dataset[:substances] = uri("/dataset/#{dataset.id}/substances")
-  dataset[:features] = uri("/dataset/#{dataset.id}/features")
-  return dataset.to_json
 end
 
 # Get a dataset attribute. One of compounds, nanoparticles, substances, features 
