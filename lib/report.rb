@@ -1,7 +1,7 @@
 # Get a list of all possible reports to prediction models
 # @param [Header] Accept one of text/uri-list,
 # @return [text/uri-list] list of all prediction models
-get "/model/report/?" do
+get "/report/?" do
   models = Model::Prediction.all
   case @accept
   when "text/uri-list"
@@ -23,7 +23,7 @@ get "/model/report/?" do
   end
 end
 
-get "/model/report/:id/?" do
+get "/report/:id/?" do
   model = Model::Lazar.find params[:id]
   resource_not_found_error "Model with id: #{params[:id]} not found." unless model
   prediction_model = Model::Prediction.find_by :model_id => params[:id]
