@@ -143,6 +143,91 @@
                 }
             }
         },
+        "/model/report": {
+            "get": {
+                "tags": [
+                    "report"
+                ],
+                "description": "Get a list of QMRF reports",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "text/uri-list",
+                            "application/json"
+                        ]
+                    }
+                ],
+                "produces": [
+                    "text/uri-list",
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
+                    }
+                }
+            }
+        },
+        "/model/report/{id}": {
+            "get": {
+                "tags": [
+                    "report"
+                ],
+                "description": "Get a QMRF report",
+                "parameters": [
+                    {
+                        "name": "accept",
+                        "in": "header",
+                        "description": "requested Content-Type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "application/xml"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/id"
+                    }
+                ],
+                "produces": [
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
+            }
+        },
         "/dataset": {
             "get": {
                 "tags": [
@@ -1062,6 +1147,10 @@
         {
             "name": "feature",
             "description": "Feature"
+        },
+        {
+            "name": "report",
+            "description": "QMRF Reporting"
         }
     ]
 }

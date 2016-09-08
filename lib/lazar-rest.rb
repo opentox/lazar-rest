@@ -1,5 +1,6 @@
 require "sinatra"
 require "../lazar/lib/lazar.rb"
+require "../qsar-report/lib/qsar-report.rb"
 include OpenTox
 
 require 'rack/cors'
@@ -30,6 +31,7 @@ end
   "feature.rb",
   "model.rb",
   "nanoparticle.rb",
+  "report.rb",
   "substance.rb",
   "validation.rb"
 ].each{ |f| require_relative f }
