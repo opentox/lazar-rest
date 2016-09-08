@@ -190,7 +190,7 @@
                 "tags": [
                     "report"
                 ],
-                "description": "Get a QMRF report",
+                "description": "Get a QMRF report prototype",
                 "parameters": [
                     {
                         "name": "accept",
