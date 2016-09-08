@@ -5,14 +5,14 @@ get "/report/?" do
   models = Model::Prediction.all
   case @accept
   when "text/uri-list"
-    uri_list = models.collect{|model| uri("/model/report/#{model.model_id}")}
+    uri_list = models.collect{|model| uri("/report/#{model.model_id}")}
     return uri_list.join("\n") + "\n"
   when "application/json"
     reports = [{}]
     #models = JSON.parse models.to_json
     models.each_index do |idx|
       reports[idx] = {}
-      reports[idx][:URI] = uri("/model/report/#{models[idx]["model_id"]}")
+      reports[idx][:URI] = uri("/report/#{models[idx]["model_id"]}")
       reports[idx][:repeated_crossvalidation_uri] = uri("/validation/repeatedcrossvalidation/#{models[idx]["repeated_crossvalidation_id"]}") if models[idx]["repeated_crossvalidation_id"]
       reports[idx][:leave_one_out_validation_uri] = uri("/validation/leaveoneoutvalidation/#{models[idx]["leave_one_out_validation_id"]}") if models[idx]["leave_one_out_validation_id"]
       reports[idx][:training_dataset_URI] = uri("/dataset/#{models[idx].training_dataset.id}") if models[idx].training_dataset.id 
