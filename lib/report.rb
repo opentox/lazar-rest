@@ -28,42 +28,55 @@ get "/report/:id/?" do
   resource_not_found_error "Model with id: #{params[:id]} not found." unless model
   prediction_model = Model::Prediction.find_by :model_id => params[:id]
 
+  lazar_version = `cd #{File.dirname(__FILE__)}/../../lazar; git symbolic-ref HEAD | cut -d/ -f3`.strip if ENV["LAZAR_ENV"] != "production"
+
   report = OpenTox::QMRFReport.new
-  
+
   # QSAR Identifier Title 1.1
   report.value "QSAR_title", "Lazar model for #{prediction_model.species} #{prediction_model.endpoint}"
 
   # Software coding the model 1.3
   report.change_catalog :software_catalog, :firstsoftware, {:name => "lazar", :description => "lazar Lazy Structure- Activity Relationships", :number => "1", :url => "https://lazar.in-silico.ch", :contact => "info@in-silico.ch"}
   report.ref_catalog :QSAR_software, :software_catalog, :firstsoftware
-  
+
   # Date of QMRF 2.1
   report.value "qmrf_date", "#{Time.now.strftime('%d %B %Y')}"
-  
+
   # QMRF author(s) and contact details 2.1
   report.change_catalog :authors_catalog, :firstauthor, {:name => "Christoph Helma", :affiliation => "in silico toxicology gmbh", :contact => "Rastatterstr. 41, CH-4057 Basel", :email => "info@in-silico.ch", :number => "1", :url => "www.in-silico.ch"}
   report.ref_catalog :qmrf_authors, :authors_catalog, :firstauthor
-  
+
   # Model developer(s) and contact details 2.5
   report.change_catalog :authors_catalog, :modelauthor, {:name => "Christoph Helma", :affiliation => "in silico toxicology gmbh", :contact => "Rastatterstr. 41, CH-4057 Basel", :email => "info@in-silico.ch", :number => "1", :url => "www.in-silico.ch"}
   report.ref_catalog :model_authors, :authors_catalog, :modelauthor
-  
+
   # Date of model development and/or publication 2.6
   report.value "model_date", "#{Time.parse(model.created_at.to_s).strftime('%Y')}"
-  
+
   # Reference(s) to main scientific papers and/or software package 2.7
   report.change_catalog :publications_catalog, :publications_catalog_1, {:title => "lazar: a modular predictive toxicology framework", :url => "http://dx.doi.org/10.3389/fphar.2013.00038"}
   report.ref_catalog :references, :publications_catalog, :publications_catalog_1
-  
+
   # Species 3.1
   report.value "model_species", prediction_model.species 
-  
+
   # Endpoint 3.2 
   report.change_catalog :endpoints_catalog, :endpoints_catalog_1, {:name => prediction_model.endpoint, :group => ""}
   report.ref_catalog :model_endpoint, :endpoints_catalog, :endpoints_catalog_1
-  
+
   # Endpoint Units 3.4
   report.value "endpoint_units", "#{prediction_model.unit}"
+
+  # Type of model 4.1
+  report.value "algorithm_type", "#{model.class.to_s.gsub('OpenTox::Model::Lazar','')}"
+
+  # Explicit algorithm 4.2
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_version}", :description => "modified k-nearest neighbor classification with activity specific similarities, weighted voting and exhaustive enumeration of fragments and neighbors"}
+  report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
+
+  
+
+  # output
   response['Content-Type'] = "application/xml"
   return report.to_xml
 
