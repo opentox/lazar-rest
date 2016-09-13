@@ -28,7 +28,7 @@ get "/report/:id/?" do
   resource_not_found_error "Model with id: #{params[:id]} not found." unless model
   prediction_model = Model::Prediction.find_by :model_id => params[:id]
 
-  lazar_version = `cd #{File.dirname(__FILE__)}/../../lazar; git symbolic-ref HEAD | cut -d/ -f3`.strip if ENV["LAZAR_ENV"] != "production"
+  lazar_commit = `cd #{File.dirname(__FILE__)}/../../lazar; git rev-parse HEAD`.strip if File.directory?("#{File.dirname(__FILE__)}/../../lazar")
 
   report = OpenTox::QMRFReport.new
 
@@ -71,7 +71,7 @@ get "/report/:id/?" do
   report.value "algorithm_type", "#{model.class.to_s.gsub('OpenTox::Model::Lazar','')}"
 
   # Explicit algorithm 4.2
-  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_version}", :description => "modified k-nearest neighbor classification with activity specific similarities, weighted voting and exhaustive enumeration of fragments and neighbors"}
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: https://github.com/opentox/lazar/tree/#{lazar_commit}", :description => "modified k-nearest neighbor classification with activity specific similarities, weighted voting and exhaustive enumeration of fragments and neighbors"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
 
   
