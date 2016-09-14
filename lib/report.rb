@@ -30,6 +30,7 @@ get "/report/:id/?" do
 
   if File.directory?("#{File.dirname(__FILE__)}/../../lazar")
     lazar_commit = `cd #{File.dirname(__FILE__)}/../../lazar; git rev-parse HEAD`.strip
+    lazar_commit = "https://github.com/opentox/lazar/tree/#{lazar_commit}"
   else
     lazar_commit = "https://github.com/opentox/lazar/releases/tag/v#{Gem.loaded_specs["lazar"].version}"
   end
@@ -75,7 +76,7 @@ get "/report/:id/?" do
   report.value "algorithm_type", "#{model.class.to_s.gsub('OpenTox::Model::Lazar','')}"
 
   # Explicit algorithm 4.2
-  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: https://github.com/opentox/lazar/tree/#{lazar_commit}", :description => "modified k-nearest neighbor classification with activity specific similarities, weighted voting and exhaustive enumeration of fragments and neighbors"}
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "modified k-nearest neighbor classification with activity specific similarities, weighted voting and exhaustive enumeration of fragments and neighbors"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
 
   # Descriptors in the model 4.3
@@ -94,6 +95,38 @@ get "/report/:id/?" do
 
   # Chemicals/Descriptors ratio 4.7
   report.value "descriptors_chemicals_ratio", "not applicable (classification based on activities of neighbors, descriptors are used for similarity calculation)"
+
+  # Description of the applicability domain of the model 5.1
+  report.value "app_domain_description", "&lt;html&gt;
+    &lt;head&gt;
+      
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;p&gt;
+        The applicability domain (AD) of the training set is characterized by 
+        the confidence index of a prediction (high confidence index: close to 
+        the applicability domain of the training set/reliable prediction, low 
+        confidence: far from the applicability domain of the 
+        trainingset/unreliable prediction). The confidence index considers (i) 
+        the similarity and number of neighbors and (ii) contradictory examples 
+        within the neighbors. A formal definition can be found in Helma 2006.
+      &lt;/p&gt;
+      &lt;p&gt;
+        The reliability of predictions decreases gradually with increasing 
+        distance from the applicability domain (i.e. decreasing confidence index)
+      &lt;/p&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;"
+
+  # Method used to assess the applicability domain 5.2
+  report.value "app_domain_method", "see Helma 2006 and Maunz 2008"
+  
+  # Software name and version for applicability domain assessment 5.3  
+  report.change_catalog :software_catalog, :software_catalog_3, {:name => "lazar, submitted version: #{lazar_commit}", :description => "integrated into main lazar algorithm", :number => "2", :url => "https://lazar.in-silico.ch", :contact => "info@in-silico.ch"}
+  report.ref_catalog :app_domain_software, :software_catalog, :software_catalog_3
+
+  # Limits of applicability 5.4
+  report.value "applicability_limits", "Predictions with low confidence index, unknown substructures and neighbors that might act by different mechanisms"
 
   # output
   response['Content-Type'] = "application/xml"
