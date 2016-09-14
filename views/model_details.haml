@@ -2,18 +2,18 @@
   %head
   %body 
     %b Model:
-
+    %br
     Source:
     = model.source
-
+    %br
     - model.classification? ? type = "Classification" : type = "Regression"
     = "Type:\t"
     = type
-
+    %br
     - training_dataset = OpenTox::Dataset.find model.training_dataset.id
     = "Training compounds:\t"
     = training_dataset.compounds.size
-    
+    %br
     - if type == "Classification"
       %b Independent crossvalidations:
     - else
@@ -21,34 +21,34 @@
     - model.crossvalidations.each do |crossvalidation|
       = "Num folds:\t"
       = crossvalidation.folds
-
+      %br
       = "Num instances:\t"
       = crossvalidation.nr_instances
-
+      %br
       = "Num unpredicted"
       = crossvalidation.nr_unpredicted
       - if model.classification?
-
+        %br
         = "Accuracy:\t"
         = crossvalidation.accuracy.round(3) if crossvalidation.accuracy
-
+        %br
         - if crossvalidation.true_rate
           = "True positive rate:\t"
           = crossvalidation.true_rate["active"].round(3) if crossvalidation.true_rate["active"]
-
+          %br
           = "True negative rate:\t"
           = crossvalidation.true_rate["inactive"].round(3) if crossvalidation.true_rate["inactive"] 
-
+          %br
         - if crossvalidation.predictivity
           = "Positive predictive value:\t"
           = crossvalidation.predictivity["active"].round(3) if crossvalidation.predictivity["active"]
-
+          %br
           = "Negative predictive value:\t"
           = crossvalidation.predictivity["inactive"].round(3) if crossvalidation.predictivity["inactive"]
-  
+          %br
 
         %b Confusion Matrix:
-        %table{:style=>"width:20%;"}
+        %table{:class => "table table-condensed table-borderless", :style=>"width:20%;"}
           %tbody
             %tr
               %td
@@ -97,16 +97,16 @@
             /%p.plot
             /  %img{:src=>"confp#{crossvalidation.id}.svg"}
           - if model.regression?
-
+            %br
             = "Root mean squared error:\t"
             = crossvalidation.rmse.round(3) if crossvalidation.rmse
-
+            %br
             = "Mean absolute error:\t"
             = crossvalidation.mae.round(3) if crossvalidation.mae
-
+            %br
             = "R square:\t"
             = crossvalidation.r_squared.round(3) if crossvalidation.r_squared
-
+            %br
             /= "Confidence plot:"
             /%p.plot
             /  %img{:src=>"/confp#{crossvalidation.id}.svg"}

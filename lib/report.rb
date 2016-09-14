@@ -150,7 +150,7 @@ get "/report/:id/?" do
   if prediction_model.crossvalidations
     crossvalidations = prediction_model.crossvalidations
     out = haml File.read(validation_template), :layout=> false, :locals => {:model => prediction_model}
-    report.value "lmo",  CGI.escapeHTML(out)
+    report.value "lmo",  out
   end
 
   # output
