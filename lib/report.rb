@@ -155,20 +155,19 @@ get "/report/:id/?" do
   end
 
   # Mechanistic basis of the model 8.1
-  report.value "mechanistic_basis","&lt;html&gt;
-  &lt;head&gt;
-    
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;
+  report.value "mechanistic_basis","<html>
+  <head>
+  </head>
+  <body>
+    <p>
       Compounds with similar structures (neighbors) are assumed to have 
       similar activities as the query compound. For the determination of 
       activity specific similarities only statistically relevant subtructures 
       (paths) are used. For this reason there is a priori no bias towards 
       specific mechanistic hypothesis.
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;"
+    </p>
+  </body>
+</html>"
 
   # A priori or a posteriori mechanistic interpretation 8.2
   report.value "mechanistic_basis_comments","a posteriori for individual predictions"
