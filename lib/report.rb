@@ -122,11 +122,23 @@ get "/report/:id/?" do
   report.value "app_domain_method", "see Helma 2006 and Maunz 2008"
   
   # Software name and version for applicability domain assessment 5.3  
-  report.change_catalog :software_catalog, :software_catalog_3, {:name => "lazar, submitted version: #{lazar_commit}", :description => "integrated into main lazar algorithm", :number => "2", :url => "https://lazar.in-silico.ch", :contact => "info@in-silico.ch"}
+  report.change_catalog :software_catalog, :software_catalog_3, {:name => "lazar, submitted version: #{lazar_commit}", :description => "integrated into main lazar algorithm", :number => "3", :url => "https://lazar.in-silico.ch", :contact => "info@in-silico.ch"}
   report.ref_catalog :app_domain_software, :software_catalog, :software_catalog_3
 
   # Limits of applicability 5.4
   report.value "applicability_limits", "Predictions with low confidence index, unknown substructures and neighbors that might act by different mechanisms"
+
+  # Availability of the training set 6.1
+  report.change_attributes "training_set_availability", {:answer => "Yes"}
+
+  # Available information for the training set 6.2
+  report.change_attributes "training_set_data", {:cas => "Yes", :chemname => "Yes", :formula => "Yes", :inchi => "Yes", :mol => "Yes", :smiles => "Yes"}
+
+  # Data for each descriptor variable for the training set 6.3
+  report.change_attributes "training_set_descriptors", {:answer => "No"}
+
+  # Data for the dependent variable for the training set 6.4
+  report.change_attributes "dependent_var_availability", {:answer => "All"}
 
   # output
   response['Content-Type'] = "application/xml"
