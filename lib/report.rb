@@ -27,6 +27,7 @@ get "/report/:id/?" do
   model = Model::Lazar.find params[:id]
   resource_not_found_error "Model with id: #{params[:id]} not found." unless model
   prediction_model = Model::Prediction.find_by :model_id => params[:id]
+  validation_template = File.join(File.dirname(__FILE__),"views/model_details.haml")
 
   if File.directory?("#{File.dirname(__FILE__)}/../../lazar")
     lazar_commit = `cd #{File.dirname(__FILE__)}/../../lazar; git rev-parse HEAD`.strip
@@ -141,10 +142,16 @@ get "/report/:id/?" do
   report.change_attributes "dependent_var_availability", {:answer => "All"}
 
   # Other information about the training set 6.5
-  report.value "other_info", "#{model.source}"
+  report.value "other_info", "#{prediction_model.source}"
 
   # Pre-processing of data before modelling 6.6
-  report.value "preprocessing", (model.class == OpennTox::Model::LazarRegression ? "-Log 10 transformation" : "none")
+  report.value "preprocessing", (model.class == OpenTox::Model::LazarRegression ? "-log 10 transformation" : "none")
+
+  if model.crossvalidations
+    crossvalidations = model.crossvalidations
+    out = Haml::Engine.new(File.read(validation_template)).render @report
+    report.value "lmo",  CGI.escapeHTML(out)
+  end
 
   # output
   response['Content-Type'] = "application/xml"
