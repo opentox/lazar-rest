@@ -98,12 +98,8 @@ get "/report/:id/?" do
   report.value "descriptors_chemicals_ratio", "not applicable (classification based on activities of neighbors, descriptors are used for similarity calculation)"
 
   # Description of the applicability domain of the model 5.1
-  report.value "app_domain_description", "&lt;html&gt;
-    &lt;head&gt;
-      
-    &lt;/head&gt;
-    &lt;body&gt;
-      &lt;p&gt;
+  report.value "app_domain_description", "<html><head></head><body>
+      <p>
         The applicability domain (AD) of the training set is characterized by 
         the confidence index of a prediction (high confidence index: close to 
         the applicability domain of the training set/reliable prediction, low 
@@ -111,13 +107,13 @@ get "/report/:id/?" do
         trainingset/unreliable prediction). The confidence index considers (i) 
         the similarity and number of neighbors and (ii) contradictory examples 
         within the neighbors. A formal definition can be found in Helma 2006.
-      &lt;/p&gt;
-      &lt;p&gt;
+      </p>
+      <p>
         The reliability of predictions decreases gradually with increasing 
         distance from the applicability domain (i.e. decreasing confidence index)
-      &lt;/p&gt;
-    &lt;/body&gt;
-  &lt;/html&gt;"
+      </p>
+    </body>
+  </html>"
 
   # Method used to assess the applicability domain 5.2
   report.value "app_domain_method", "see Helma 2006 and Maunz 2008"
@@ -155,10 +151,7 @@ get "/report/:id/?" do
   end
 
   # Mechanistic basis of the model 8.1
-  report.value "mechanistic_basis","<html>
-  <head>
-  </head>
-  <body>
+  report.value "mechanistic_basis","<html><head></head><body>
     <p>
       Compounds with similar structures (neighbors) are assumed to have 
       similar activities as the query compound. For the determination of 
@@ -173,24 +166,20 @@ get "/report/:id/?" do
   report.value "mechanistic_basis_comments","a posteriori for individual predictions"
 
   # Other information about the mechanistic interpretation 8.3
-  report.value "mechanistic_basis_info","Hypothesis about biochemical mechanisms can be derived from individual 
-      predictions by inspecting neighbors and relevant fragments.
-
-
-      Neighbors are compounds that are similar in respect to a certain 
+  report.value "mechanistic_basis_info","<html><head></head><body><p>Hypothesis about biochemical mechanisms can be derived from individual 
+      predictions by inspecting neighbors and relevant fragments.</p>
+      <p>Neighbors are compounds that are similar in respect to a certain 
       endpoint and it is likely that compounds with high similarity act by 
       similar mechanisms as the query compound. Links at the webinterface 
       prove an easy access to additional experimental data and literature 
-      citations for the neighbors and the query structure.
-
-
-      Activating and deactivating parts of the query compound are highlighted 
+      citations for the neighbors and the query structure.</p>
+      <p>Activating and deactivating parts of the query compound are highlighted 
       in red and green on the webinterface. Fragments that are unknown (or too 
       infrequent for statistical evaluation are marked in yellow and 
       additional statistical information about the individual fragments can be 
       retrieved. Please note that lazar predictions are based on neighbors and 
       not on fragments. Fragments and their statistical significance are used 
-      for the calculation of activity specific similarities."
+      for the calculation of activity specific similarities.</p>"
 
   # output
   response['Content-Type'] = "application/xml"
