@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.2'
 
   s.add_runtime_dependency "lazar"
+  s.add_runtime_dependency "qsar-report"
   s.add_runtime_dependency "sinatra"
   s.add_runtime_dependency "haml"
   s.add_runtime_dependency "sass"

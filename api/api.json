@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "REST Webservice for lazar and nano-lazar\n",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "title": "Lazar & Nano-Lazar REST Service",
         "contact": {
             "name": "in silico toxicology gmbh",

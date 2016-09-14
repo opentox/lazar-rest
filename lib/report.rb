@@ -60,7 +60,7 @@ get "/report/:id/?" do
   report.value "model_date", "#{Time.parse(model.created_at.to_s).strftime('%Y')}"
 
   # Reference(s) to main scientific papers and/or software package 2.7
-  report.change_catalog :publications_catalog, :publications_catalog_1, {:title => "Maunz, G&uuml;tlein, Rautenberg, Vorgrimmler, Gebele and Helma (2013), lazar: a modular predictive toxicology framework  ", :url => "http://dx.doi.org/10.3389/fphar.2013.00038"}
+  report.change_catalog :publications_catalog, :publications_catalog_1, {:title => "Maunz, Guetlein, Rautenberg, Vorgrimmler, Gebele and Helma (2013), lazar: a modular predictive toxicology framework  ", :url => "http://dx.doi.org/10.3389/fphar.2013.00038"}
   report.ref_catalog :references, :publications_catalog, :publications_catalog_1
 
   # Reference(s) to main scientific papers and/or software package 2.7
