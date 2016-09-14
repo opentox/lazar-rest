@@ -60,7 +60,7 @@ get "/report/:id/?" do
   report.value "model_date", "#{Time.parse(model.created_at.to_s).strftime('%Y')}"
 
   # Reference(s) to main scientific papers and/or software package 2.7
-  report.change_catalog :publications_catalog, :publications_catalog_1, {:title => "Maunz, Gütlein, Rautenberg, Vorgrimmler, Gebele and Helma (2013), lazar: a modular predictive toxicology framework  ", :url => "http://dx.doi.org/10.3389/fphar.2013.00038"}
+  report.change_catalog :publications_catalog, :publications_catalog_1, {:title => "Maunz, G&uuml;tlein, Rautenberg, Vorgrimmler, Gebele and Helma (2013), lazar: a modular predictive toxicology framework  ", :url => "http://dx.doi.org/10.3389/fphar.2013.00038"}
   report.ref_catalog :references, :publications_catalog, :publications_catalog_1
 
   # Reference(s) to main scientific papers and/or software package 2.7
@@ -188,7 +188,7 @@ get "/report/:id/?" do
   # Bibliography 9.2
   report.ref_catalog :bibliography, :publications_catalog, :publications_catalog_1
   report.ref_catalog :bibliography, :publications_catalog, :publications_catalog_2
-  report.change_catalog :publications_catalog, :publications_catalog_3, {:title => "Lazy structure-activity relationships (lazar) for the prediction of rodent carcinogenicity and Salmonella mutagenicity.", :url => "http://dx.doi.org/10.1007/s11030-005-9001-5"}
+  report.change_catalog :publications_catalog, :publications_catalog_3, {:title => "Helma (2006), Lazy structure-activity relationships (lazar) for the prediction of rodent carcinogenicity and Salmonella mutagenicity.", :url => "http://dx.doi.org/10.1007/s11030-005-9001-5"}
   report.ref_catalog :bibliography, :publications_catalog, :publications_catalog_3
 
   # output
