@@ -147,11 +147,51 @@ get "/report/:id/?" do
   # Pre-processing of data before modelling 6.6
   report.value "preprocessing", (model.class == OpenTox::Model::LazarRegression ? "-log10 transformation" : "none")
 
+  # Robustness - Statistics obtained by leave-many-out cross-validation 6.9
   if prediction_model.crossvalidations
     crossvalidations = prediction_model.crossvalidations
     out = haml File.read(validation_template), :layout=> false, :locals => {:model => prediction_model}
     report.value "lmo",  out
   end
+
+  # Mechanistic basis of the model 8.1
+  report.value "mechanistic_basis","&lt;html&gt;
+  &lt;head&gt;
+    
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      Compounds with similar structures (neighbors) are assumed to have 
+      similar activities as the query compound. For the determination of 
+      activity specific similarities only statistically relevant subtructures 
+      (paths) are used. For this reason there is a priori no bias towards 
+      specific mechanistic hypothesis.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;"
+
+  # A priori or a posteriori mechanistic interpretation 8.2
+  report.value "mechanistic_basis_comments","a posteriori for individual predictions"
+
+  # Other information about the mechanistic interpretation 8.3
+  report.value "mechanistic_basis_info","Hypothesis about biochemical mechanisms can be derived from individual 
+      predictions by inspecting neighbors and relevant fragments.
+
+
+      Neighbors are compounds that are similar in respect to a certain 
+      endpoint and it is likely that compounds with high similarity act by 
+      similar mechanisms as the query compound. Links at the webinterface 
+      prove an easy access to additional experimental data and literature 
+      citations for the neighbors and the query structure.
+
+
+      Activating and deactivating parts of the query compound are highlighted 
+      in red and green on the webinterface. Fragments that are unknown (or too 
+      infrequent for statistical evaluation are marked in yellow and 
+      additional statistical information about the individual fragments can be 
+      retrieved. Please note that lazar predictions are based on neighbors and 
+      not on fragments. Fragments and their statistical significance are used 
+      for the calculation of activity specific similarities."
 
   # output
   response['Content-Type'] = "application/xml"
