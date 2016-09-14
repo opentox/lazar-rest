@@ -60,8 +60,12 @@ get "/report/:id/?" do
   report.value "model_date", "#{Time.parse(model.created_at.to_s).strftime('%Y')}"
 
   # Reference(s) to main scientific papers and/or software package 2.7
-  report.change_catalog :publications_catalog, :publications_catalog_1, {:title => "lazar: a modular predictive toxicology framework", :url => "http://dx.doi.org/10.3389/fphar.2013.00038"}
+  report.change_catalog :publications_catalog, :publications_catalog_1, {:title => "Maunz, Gütlein, Rautenberg, Vorgrimmler, Gebele and Helma (2013), lazar: a modular predictive toxicology framework  ", :url => "http://dx.doi.org/10.3389/fphar.2013.00038"}
   report.ref_catalog :references, :publications_catalog, :publications_catalog_1
+
+  # Reference(s) to main scientific papers and/or software package 2.7
+  report.change_catalog :publications_catalog, :publications_catalog_2, {:title => "Maunz A and Helma C (2008) Prediction of chemical toxicity with local support vector regression and activity-specific kernels. SAR & QSAR in Environmental Research 19 (5-6), 413-431", :url => "http://dx.doi.org/10.1080/10629360802358430"}
+  report.ref_catalog :references, :publications_catalog, :publications_catalog_2
 
   # Species 3.1
   report.value "model_species", prediction_model.species 
@@ -180,6 +184,12 @@ get "/report/:id/?" do
       retrieved. Please note that lazar predictions are based on neighbors and 
       not on fragments. Fragments and their statistical significance are used 
       for the calculation of activity specific similarities.</p>"
+
+  # Bibliography 9.2
+  report.ref_catalog :bibliography, :publications_catalog, :publications_catalog_1
+  report.ref_catalog :bibliography, :publications_catalog, :publications_catalog_2
+  report.change_catalog :publications_catalog, :publications_catalog_3, {:title => "Lazy structure-activity relationships (lazar) for the prediction of rodent carcinogenicity and Salmonella mutagenicity.", :url => "http://dx.doi.org/10.1007/s11030-005-9001-5"}
+  report.ref_catalog :bibliography, :publications_catalog, :publications_catalog_3
 
   # output
   response['Content-Type'] = "application/xml"
