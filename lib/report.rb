@@ -28,7 +28,11 @@ get "/report/:id/?" do
   resource_not_found_error "Model with id: #{params[:id]} not found." unless model
   prediction_model = Model::Prediction.find_by :model_id => params[:id]
 
-  lazar_commit = `cd #{File.dirname(__FILE__)}/../../lazar; git rev-parse HEAD`.strip if File.directory?("#{File.dirname(__FILE__)}/../../lazar")
+  if File.directory?("#{File.dirname(__FILE__)}/../../lazar")
+    lazar_commit = `cd #{File.dirname(__FILE__)}/../../lazar; git rev-parse HEAD`.strip
+  else
+    lazar_commit = "https://github.com/opentox/lazar/releases/tag/v#{Gem.loaded_specs["lazar"].version}"
+  end
 
   report = OpenTox::QMRFReport.new
 
@@ -74,7 +78,22 @@ get "/report/:id/?" do
   report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: https://github.com/opentox/lazar/tree/#{lazar_commit}", :description => "modified k-nearest neighbor classification with activity specific similarities, weighted voting and exhaustive enumeration of fragments and neighbors"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
 
+  # Descriptors in the model 4.3
+  report.change_catalog :descriptors_catalog, :descriptors_catalog_1, {:description => "all statistically relevant paths are used for similarity calculation", :name => "linear fragmens (paths)", :publication_ref => "", :units => "true/false (i.e. present/absent)"}
+  report.ref_catalog :algorithms_descriptors, :descriptors_catalog, :descriptors_catalog_1
+
+  # Descriptor selection 4.4
+  report.value "descriptors_selection", "statistical filter (chi-square with Yates correction)"
   
+  # Algorithm and descriptor generation 4.5
+  report.value "descriptors_generation", "exhaustive breadth first search for paths in chemical graphs (simplified MolFea algorithm)"
+  
+  # Software name and version for descriptor generation 4.6
+  report.change_catalog :software_catalog, :software_catalog_2, {:name => "lazar, submitted version: #{lazar_commit}", :description => "simplified MolFea algorithm", :number => "2", :url => "https://lazar.in-silico.ch", :contact => "info@in-silico.ch"}
+  report.ref_catalog :descriptors_generation_software, :software_catalog, :software_catalog_2
+
+  # Chemicals/Descriptors ratio 4.7
+  report.value "descriptors_chemicals_ratio", "not applicable (classification based on activities of neighbors, descriptors are used for similarity calculation)"
 
   # output
   response['Content-Type'] = "application/xml"
