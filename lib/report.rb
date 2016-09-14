@@ -140,6 +140,12 @@ get "/report/:id/?" do
   # Data for the dependent variable for the training set 6.4
   report.change_attributes "dependent_var_availability", {:answer => "All"}
 
+  # Other information about the training set 6.5
+  report.value "other_info", "#{model.source}"
+
+  # Pre-processing of data before modelling 6.6
+  report.value "preprocessing", (model.class == OpennTox::Model::LazarRegression ? "-Log 10 transformation" : "none")
+
   # output
   response['Content-Type'] = "application/xml"
   return report.to_xml
