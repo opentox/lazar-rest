@@ -4,7 +4,8 @@
     %b Model:
     %br
     Source:
-    = model.source
+    %a{:href => model.source}
+      = model.source
     %br
     - model.classification? ? type = "Classification" : type = "Regression"
     = "Type:\t"
@@ -14,84 +15,87 @@
     = "Training compounds:\t"
     = training_dataset.compounds.size
     %br
-    - if type == "Classification"
-      %b Independent crossvalidations:
-    - else
-      %b Independent crossvalidations (-log10 transformed):
-    - model.crossvalidations.each do |crossvalidation|
-      = "Num folds:\t"
-      = crossvalidation.folds
-      %br
-      = "Num instances:\t"
-      = crossvalidation.nr_instances
-      %br
-      = "Num unpredicted"
-      = crossvalidation.nr_unpredicted
-      - if model.classification?
+    %p
+      - if type == "Classification"
+        %b Independent crossvalidations:
+      - else
+        %b Independent crossvalidations (-log10 transformed):
+      - model.crossvalidations.each do |crossvalidation|
         %br
-        = "Accuracy:\t"
-        = crossvalidation.accuracy.round(3) if crossvalidation.accuracy
+        = "Num folds:\t"
+        = crossvalidation.folds
         %br
-        - if crossvalidation.true_rate
-          = "True positive rate:\t"
-          = crossvalidation.true_rate["active"].round(3) if crossvalidation.true_rate["active"]
+        = "Num instances:\t"
+        = crossvalidation.nr_instances
+        %br
+        = "Num unpredicted"
+        = crossvalidation.nr_unpredicted
+        - if model.classification?
           %br
-          = "True negative rate:\t"
-          = crossvalidation.true_rate["inactive"].round(3) if crossvalidation.true_rate["inactive"] 
+          = "Accuracy:\t"
+          = crossvalidation.accuracy.round(3) if crossvalidation.accuracy
           %br
-        - if crossvalidation.predictivity
-          = "Positive predictive value:\t"
-          = crossvalidation.predictivity["active"].round(3) if crossvalidation.predictivity["active"]
+          - if crossvalidation.true_rate
+            = "True positive rate:\t"
+            = crossvalidation.true_rate["active"].round(3) if crossvalidation.true_rate["active"]
+            %br
+            = "True negative rate:\t"
+            = crossvalidation.true_rate["inactive"].round(3) if crossvalidation.true_rate["inactive"] 
+            %br
+          - if crossvalidation.predictivity
+            = "Positive predictive value:\t"
+            = crossvalidation.predictivity["active"].round(3) if crossvalidation.predictivity["active"]
+            %br
+            = "Negative predictive value:\t"
+            = crossvalidation.predictivity["inactive"].round(3) if crossvalidation.predictivity["inactive"]
+            %br
+  
           %br
-          = "Negative predictive value:\t"
-          = crossvalidation.predictivity["inactive"].round(3) if crossvalidation.predictivity["inactive"]
-          %br
-
-        %b Confusion Matrix:
-        %table{:class => "table table-condensed table-borderless", :style=>"width:20%;"}
-          %tbody
-            %tr
-              %td
-              %td
-              %td
-                %b actual
-              %td
-              %td
-            %tr
-              %td
-              %td
-              %td active
-              %td inactive
-              -#%td total
-            %tr
-              %td
-                %b predicted
-              %td active
-              %td
-                =crossvalidation.confusion_matrix[0][0]
-              %td
-                =crossvalidation.confusion_matrix[0][1]
-              -#%td 
-                =crossvalidation.confusion_matrix[0][0]+crossvalidation.confusion_matrix[0][1]
-            %tr
-              %td
-              %td inactive
-              %td
-                =crossvalidation.confusion_matrix[1][0]
-              %td
-                =crossvalidation.confusion_matrix[1][1]
-              -#%td 
-                =crossvalidation.confusion_matrix[1][0]+crossvalidation.confusion_matrix[1][1]
-            -#%tr
-              %td
-              %td total
-              %td
-                =crossvalidation.confusion_matrix[0][0]+crossvalidation.confusion_matrix[1][0]
-              %td
-                =crossvalidation.confusion_matrix[0][1]+crossvalidation.confusion_matrix[1][1]
-              %td
-                -#= "Confusion Matrix:\t"
-                -#= crossvalidation.confusion_matrix
+          %b Confusion Matrix:
+          %table{:class => "table table-condensed table-borderless", :style=>"width:20%;"}
+            %tbody
+              %tr
+                %td
+                %td
+                %td
+                  %b actual
+                %td
+                %td
+              %tr
+                %td
+                %td
+                %td active
+                %td inactive
+                -#%td total
+              %tr
+                %td
+                  %b predicted
+                %td active
+                %td
+                  =crossvalidation.confusion_matrix[0][0]
+                %td
+                  =crossvalidation.confusion_matrix[0][1]
+                -#%td 
+                  =crossvalidation.confusion_matrix[0][0]+crossvalidation.confusion_matrix[0][1]
+              %tr
+                %td
+                %td inactive
+                %td
+                  =crossvalidation.confusion_matrix[1][0]
+                %td
+                  =crossvalidation.confusion_matrix[1][1]
+                -#%td 
+                  =crossvalidation.confusion_matrix[1][0]+crossvalidation.confusion_matrix[1][1]
+              -#%tr
+                %td
+                %td total
+                %td
+                  =crossvalidation.confusion_matrix[0][0]+crossvalidation.confusion_matrix[1][0]
+                %td
+                  =crossvalidation.confusion_matrix[0][1]+crossvalidation.confusion_matrix[1][1]
+                %td
+                  -#= "Confusion Matrix:\t"
+                  -#= crossvalidation.confusion_matrix
 
             /= "Confidence plot:"
             /%p.plot
