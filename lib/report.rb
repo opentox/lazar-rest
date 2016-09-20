@@ -148,7 +148,7 @@ get "/report/:id/?" do
   report.value "preprocessing", (model.class == OpenTox::Model::LazarRegression ? "-log10 transformation" : "none")
 
   # Robustness - Statistics obtained by leave-many-out cross-validation 6.9
-  if prediction_model.crossvalidations
+  if prediction_model.repeated_crossvalidation
     crossvalidations = prediction_model.crossvalidations
     out = haml File.read(validation_template), :layout=> false, :locals => {:model => prediction_model}
     report.value "lmo",  out
