@@ -77,12 +77,15 @@ get "/report/:id/?" do
   # Endpoint Units 3.4
   report.value "endpoint_units", "#{prediction_model.unit}"
 
+  model_type = model.class.to_s.gsub('OpenTox::Model::Lazar','')
   # Type of model 4.1
-  report.value "algorithm_type", "#{model.class.to_s.gsub('OpenTox::Model::Lazar','')}"
+  report.value "algorithm_type", "#{model_type}"
 
   # Explicit algorithm 4.2
-  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "modified k-nearest neighbor classification with activity specific similarities, weighted voting and exhaustive enumeration of fragments and neighbors"}
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "modified k-nearest neighbor #{model_type}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_2, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "#{model.prediction_algorithm.gsub('OpenTox::Algorithm::','').gsub('_',' ').titleize.gsub('.', ' with ')}"}
+  report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_2
 
   # Descriptors in the model 4.3
   report.change_catalog :descriptors_catalog, :descriptors_catalog_1, {:description => "all statistically relevant paths are used for similarity calculation", :name => "linear fragmens (paths)", :publication_ref => "", :units => "true/false (i.e. present/absent)"}
