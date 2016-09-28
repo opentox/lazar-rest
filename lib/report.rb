@@ -94,8 +94,8 @@ get "/report/:id/?" do
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_2
 
   # Descriptors in the model 4.3
-  if neighbor_algorithm_parameters[:type]
-    report.change_catalog :descriptors_catalog, :descriptors_catalog_1, {:description => "", :name => "#{neighbor_algorithm_parameters[:type]}", :publication_ref => "", :units => ""}
+  if model.neighbor_algorithm_parameters[:type]
+    report.change_catalog :descriptors_catalog, :descriptors_catalog_1, {:description => "", :name => "#{model.neighbor_algorithm_parameters[:type]}", :publication_ref => "", :units => ""}
     report.ref_catalog :algorithms_descriptors, :descriptors_catalog, :descriptors_catalog_1
   end
 
