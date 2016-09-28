@@ -78,12 +78,15 @@ get "/report/:id/?" do
   report.value "endpoint_units", "#{prediction_model.unit}"
 
   model_type = model.class.to_s.gsub('OpenTox::Model::Lazar','')
+
   # Type of model 4.1
   report.value "algorithm_type", "#{model_type}"
 
   # Explicit algorithm 4.2
-  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "modified k-nearest neighbor #{model_type}"}
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "#{model.neighbor_algorithm.gsub('_',' ').titleize}#{(model.neighbor_algorithm_parameters[:min_sim] ? ' with similarity > ' + model.neighbor_algorithm_parameters[:min_sim].to_s : '')}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_3, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "modified k-nearest neighbor #{model_type}"}
+  report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_3
   report.change_catalog :algorithms_catalog, :algorithms_catalog_2, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "#{model.prediction_algorithm.gsub('OpenTox::Algorithm::','').gsub('_',' ').titleize.gsub('.', ' with ')}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_2
 
@@ -92,7 +95,7 @@ get "/report/:id/?" do
   report.ref_catalog :algorithms_descriptors, :descriptors_catalog, :descriptors_catalog_1
 
   # Descriptor selection 4.4
-  report.value "descriptors_selection", "statistical filter (chi-square with Yates correction)"
+  report.value "descriptors_selection", "#{model.feature_selection_algorithm.gsub('_',' ')} #{model.feature_selection_algorithm_parameters.collect{|k,v| k.to_s + ': ' + v.to_s}.join(', ')}" if model.feature_selection_algorithm
   
   # Algorithm and descriptor generation 4.5
   report.value "descriptors_generation", "exhaustive breadth first search for paths in chemical graphs (simplified MolFea algorithm)"
