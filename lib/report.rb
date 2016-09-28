@@ -83,16 +83,21 @@ get "/report/:id/?" do
   report.value "algorithm_type", "#{model_type}"
 
   # Explicit algorithm 4.2
-  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "#{model.neighbor_algorithm.gsub('_',' ').titleize}#{(model.neighbor_algorithm_parameters[:min_sim] ? ' with similarity > ' + model.neighbor_algorithm_parameters[:min_sim].to_s : '')}"}
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "Neighbor algorithm: #{model.neighbor_algorithm.gsub('_',' ').titleize}#{(model.neighbor_algorithm_parameters[:min_sim] ? ' with similarity > ' + model.neighbor_algorithm_parameters[:min_sim].to_s : '')}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
   report.change_catalog :algorithms_catalog, :algorithms_catalog_3, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "modified k-nearest neighbor #{model_type}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_3
-  report.change_catalog :algorithms_catalog, :algorithms_catalog_2, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "#{model.prediction_algorithm.gsub('OpenTox::Algorithm::','').gsub('_',' ').titleize.gsub('.', ' with ')}"}
+  if model.prediction_algorithm_parameters
+    pred_algorithm_params = (model.prediction_algorithm_parameters[:method] == "rf" ? "random forest" : model.prediction_algorithm_parameters[:method])
+  end
+  report.change_catalog :algorithms_catalog, :algorithms_catalog_2, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "Prediction algorithm: #{model.prediction_algorithm.gsub('OpenTox::Algorithm::','').gsub('_',' ').gsub('.', ' with ')} #{(pred_algorithm_params ? pred_algorithm_params : '')}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_2
 
   # Descriptors in the model 4.3
-  report.change_catalog :descriptors_catalog, :descriptors_catalog_1, {:description => "all statistically relevant paths are used for similarity calculation", :name => "linear fragmens (paths)", :publication_ref => "", :units => "true/false (i.e. present/absent)"}
-  report.ref_catalog :algorithms_descriptors, :descriptors_catalog, :descriptors_catalog_1
+  if neighbor_algorithm_parameters[:type]
+    report.change_catalog :descriptors_catalog, :descriptors_catalog_1, {:description => "", :name => "#{neighbor_algorithm_parameters[:type]}", :publication_ref => "", :units => ""}
+    report.ref_catalog :algorithms_descriptors, :descriptors_catalog, :descriptors_catalog_1
+  end
 
   # Descriptor selection 4.4
   report.value "descriptors_selection", "#{model.feature_selection_algorithm.gsub('_',' ')} #{model.feature_selection_algorithm_parameters.collect{|k,v| k.to_s + ': ' + v.to_s}.join(', ')}" if model.feature_selection_algorithm
