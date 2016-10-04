@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "REST Webservice for lazar and nano-lazar\n",
+        "description": "REST API webservice for lazar and nano-lazar. \n*lazar* (lazy structure–activity relationships) is a modular framework for predictive toxicology. With activeted Authentication & Authorization, subjectid authorization token are obligatory for designated services.\n",
         "version": "0.0.3",
         "title": "Lazar & Nano-Lazar REST Service",
         "contact": {
@@ -37,6 +37,9 @@
                             "text/uri-list",
                             "application/json"
                         ]
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -81,6 +84,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -119,6 +125,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -160,6 +169,9 @@
                             "text/uri-list",
                             "application/json"
                         ]
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -204,6 +216,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -245,6 +260,9 @@
                             "text/uri-list",
                             "application/json"
                         ]
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -290,6 +308,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -347,6 +368,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -388,6 +412,9 @@
                             "text/uri-list",
                             "application/json"
                         ]
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -432,6 +459,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -473,6 +503,9 @@
                             "text/uri-list",
                             "application/json"
                         ]
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -517,6 +550,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -688,6 +724,9 @@
                     },
                     {
                         "$ref": "#/parameters/valtype"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -735,6 +774,9 @@
                     },
                     {
                         "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -836,6 +878,9 @@
                         "items": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -1080,6 +1125,13 @@
             "in": "path",
             "description": "validation type",
             "required": true,
+            "type": "string"
+        },
+        "subjectid": {
+            "in": "header",
+            "name": "subjectid",
+            "description": "authorization token",
+            "required": false,
             "type": "string"
         }
     },
