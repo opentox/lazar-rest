@@ -1,32 +1,39 @@
 # Get a list of a single or all descriptors
 # @param [Header] Accept one of text/plain, application/json
-# @param [Path] Descriptor name (e.G.: Openbabel.HBA1)
+# @param [Path] Descriptor name or descriptor ID (e.G.: Openbabel.HBA1, 5755f8eb3cf99a00d8fedf2f)
 # @return [text/plain, application/json] list of all prediction models
 get "/compound/descriptor/?:descriptor?" do
   case @accept
   when "application/json"
     return "#{JSON.pretty_generate PhysChem::DESCRIPTORS} "  unless params[:descriptor]
-    return {params[:descriptor] => PhysChem::DESCRIPTORS[params[:descriptor]]}.to_json
+    return {params[:descriptor] => PhysChem::DESCRIPTORS[params[:descriptor]]}.to_json if PhysChem::DESCRIPTORS.include?(params[:descriptor])
+    return {PhysChem.find(params[:descriptor])}.to_json if PhysChem.find(params[:descriptor])
   else
     return PhysChem::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"} unless params[:descriptor]
-    return PhysChem::DESCRIPTORS[params[:descriptor]]
+    return PhysChem::DESCRIPTORS[params[:descriptor]] if PhysChem::DESCRIPTORS.include?(params[:descriptor])
+    return "#{PhysChem.find(params[:descriptor]).name}: #{PhysChem.find(params[:descriptor]).description}" if PhysChem.find(params[:descriptor])
   end
 end
 
 post "/compound/descriptor/?" do
   bad_request_error "Missing Parameter " unless params[:identifier] && params[:descriptor]
-  descriptor = params['descriptor'].split(',')
+  descriptors = params['descriptor'].split(',')
   compound = Compound.from_smiles params[:identifier]
-  d = compound.physchem descriptor
-  csv = d.to_csv
-  csv = "SMILES,#{params[:descriptor]}\n#{params[:identifier]},#{csv}" if params[:identifier]
+  physchem_descriptors = []
+  descriptors.each do |descriptor|
+    physchem_descriptors << PhysChem.find_by(:name => descriptor)
+  end
+  result = compound.physchem physchem_descriptors
+  csv = result.collect{|k,v| "\"#{PhysChem.find(k).name}\",#{v}" }.join("\n")
+  csv = "SMILES,#{params[:identifier]}\n#{csv}" if params[:identifier]
   case @accept
-  when "application/csv"
+  when "text/csv","application/csv"
     return csv
   when "application/json"
-    lines = CSV.parse(csv)
-    keys = lines.delete lines.first
-    data = lines.collect{|values|Hash[keys.zip(values)]}
+    result_hash = result.collect{|k,v|  {"#{PhysChem.find(k).name}" => "#{v}"}}  # result.collect{|k,v| "\"#{PhysChem.find(k).name}\"" => "#{v}"}.join(",")
+    data = {"compound" => {"SMILES" => "#{params[:identifier]}"}}
+    data["compound"]["InChI"] = "#{compound.inchi}" if compound.inchi
+    data["compound"]["results"] = result_hash
     return JSON.pretty_generate(data)
   end
 end
