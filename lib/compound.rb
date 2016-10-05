@@ -7,7 +7,7 @@ get "/compound/descriptor/?:descriptor?" do
   when "application/json"
     return "#{JSON.pretty_generate PhysChem::DESCRIPTORS} "  unless params[:descriptor]
     return {params[:descriptor] => PhysChem::DESCRIPTORS[params[:descriptor]]}.to_json if PhysChem::DESCRIPTORS.include?(params[:descriptor])
-    return {PhysChem.find(params[:descriptor])}.to_json if PhysChem.find(params[:descriptor])
+    return PhysChem.find(params[:descriptor]).to_json if PhysChem.find(params[:descriptor])
   else
     return PhysChem::DESCRIPTORS.collect{|k, v| "#{k}: #{v}\n"} unless params[:descriptor]
     return PhysChem::DESCRIPTORS[params[:descriptor]] if PhysChem::DESCRIPTORS.include?(params[:descriptor])
