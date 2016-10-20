@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "REST API webservice for lazar and nano-lazar. \n*lazar* (lazy structure–activity relationships) is a modular framework for predictive toxicology. With activeted Authentication & Authorization, subjectid authorization token are obligatory for designated services.\n",
+        "description": "REST API webservice for lazar and nano-lazar. \n*lazar* (lazy structure–activity relationships) is a modular framework for predictive toxicology. With activated Authentication & Authorization, subjectid authorization token are obligatory for designated services.\n",
         "version": "0.0.3",
         "title": "Lazar & Nano-Lazar REST Service",
         "contact": {
