@@ -40,6 +40,13 @@ unicorn -p 8080 -D
 
 For full Swagger API documentation open /api/api.json with Swagger UI.
 
+## See also
+* [eNanoMapper at github](https://github.com/enanomapper)
+* [eNanoMapper webpage](http://enanomapper.net)
+* [lazar at github](https://github.com/opentox/lazar)
+* [QSAR-report gem at github](https://github.com/opentox/qsar-report)
+
+
 ## Copyright
 
 Copyright (c) 2015-2016 Christoph Helma, Micha Rautenberg, Denis Gebele. See LICENSE for details.
