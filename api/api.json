@@ -157,7 +157,7 @@
                 "tags": [
                     "model"
                 ],
-                "description": "Predict a nanoparticle",
+                "description": "Predict a nanoparticle post core and coating URIs with physchem descriptor values to a model URI.\n* core URI e.g. core=<HOST_URL>/compound/<ID>\n* coating URI e.g. core=<HOST_URL>/compound/<ID>\n* physchem descriptors - e.G. physchem['<HOST_URL>/descriptor/<UUID>']=8.72",
                 "parameters": [
                     {
                         "name": "core",
@@ -176,7 +176,7 @@
                     {
                         "name": "physchem",
                         "in": "formData",
-                        "description": "physchem descriptors. key-value hash of physchem descriptors.",
+                        "description": "physchem descriptors",
                         "required": true,
                         "type": "string"
                     },
