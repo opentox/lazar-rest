@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "description": "REST API webservice for lazar and nano-lazar. \n*lazar* (lazy structure–activity relationships) is a modular framework for predictive toxicology. With activated Authentication & Authorization, subjectid authorization token are obligatory for designated services.\n",
-        "version": "0.0.3",
+        "version": "1.0.0",
         "title": "Lazar & Nano-Lazar REST Service",
         "contact": {
             "name": "in silico toxicology gmbh",
@@ -120,6 +120,63 @@
                         "name": "identifier",
                         "in": "formData",
                         "description": "SMILES identifier or comma seperated list of SMILES identifiers",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/id"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    },
+                    "400": {
+                        "$ref": "#/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/404"
+                    }
+                }
+            }
+        },
+        "/model/{id}/nanoparticle": {
+            "post": {
+                "tags": [
+                    "model"
+                ],
+                "description": "Predict a nanoparticle",
+                "parameters": [
+                    {
+                        "name": "core",
+                        "in": "formData",
+                        "description": "core",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "coating",
+                        "in": "formData",
+                        "description": "coating",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "physchem",
+                        "in": "formData",
+                        "description": "physchem descriptors. key-value hash of physchem descriptors.",
                         "required": true,
                         "type": "string"
                     },
