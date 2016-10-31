@@ -114,7 +114,7 @@
                 "tags": [
                     "model"
                 ],
-                "description": "Predict a compound",
+                "description": "Predict a compound or a nanoparticle",
                 "parameters": [
                     {
                         "name": "identifier",
