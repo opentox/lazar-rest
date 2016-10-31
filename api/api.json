@@ -119,7 +119,7 @@
                     {
                         "name": "identifier",
                         "in": "formData",
-                        "description": "SMILES identifier or Nanoparticle URI or comma seperated list of SMILES  identifiers or Nanoparticle URI",
+                        "description": "SMILES identifier or Nanoparticle URI or comma separated list of SMILES  identifiers or Nanoparticle URI",
                         "required": true,
                         "type": "string"
                     },
