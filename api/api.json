@@ -119,64 +119,7 @@
                     {
                         "name": "identifier",
                         "in": "formData",
-                        "description": "SMILES identifier or comma seperated list of SMILES identifiers",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/id"
-                    },
-                    {
-                        "$ref": "#/parameters/subjectid"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/responses/200"
-                    },
-                    "400": {
-                        "$ref": "#/responses/400"
-                    },
-                    "401": {
-                        "$ref": "#/responses/401"
-                    },
-                    "403": {
-                        "$ref": "#/responses/403"
-                    },
-                    "404": {
-                        "$ref": "#/responses/404"
-                    }
-                }
-            }
-        },
-        "/model/{id}/nanoparticle": {
-            "post": {
-                "tags": [
-                    "model"
-                ],
-                "description": "Predict a nanoparticle. POST core and coating URIs with physchem descriptor URI and values to a model URI.\n* core URI e.g. core=HOST_URL/compound/ID\n* coating URI e.g. core=HOST_URL/compound/ID\n* physchem descriptors - e.G. physchem['HOST_URL/descriptor/UUID']=8.72",
-                "parameters": [
-                    {
-                        "name": "core",
-                        "in": "formData",
-                        "description": "core",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "coating",
-                        "in": "formData",
-                        "description": "coating",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "physchem",
-                        "in": "formData",
-                        "description": "physchem descriptors",
+                        "description": "SMILES identifier or Nanoparticle URI or comma seperated list of SMILES  identifiers or Nanoparticle URI",
                         "required": true,
                         "type": "string"
                     },
