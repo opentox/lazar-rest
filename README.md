@@ -38,7 +38,9 @@ unicorn -p 8080 -D
 
 ## Documentation
 
-For full Swagger API documentation open /api/api.json with Swagger UI.
+* For full Swagger API documentation open /api/api.json with Swagger UI.
+* [RubyDoc.info Code documentation](http://www.rubydoc.info/gems/lazar-rest)
+
 
 ## See also
 * [eNanoMapper at github](https://github.com/enanomapper)

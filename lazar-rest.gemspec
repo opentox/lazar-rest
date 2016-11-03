@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = "lazar-rest"
   s.version     = File.read("./VERSION")
   s.authors     = ["Christoph Helma","Micha Rautenberg","Denis Gebele"]
-  s.email       = ["helma@in-silico.ch","rautenberg@in-silico.ch","gebele@in-silico.ch"]
+  s.email       = ["supprot@in-silico.ch"]
   s.homepage    = "http://github.com/opentox/lazar-rest"
   s.summary     = %q{lazar-rest}
   s.description = %q{REST Interface for Lazar Toxicology Predictions}
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ["lib"]
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 2.0.0'
 
   s.add_runtime_dependency "lazar"
   s.add_runtime_dependency "qsar-report"
