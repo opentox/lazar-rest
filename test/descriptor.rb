@@ -27,13 +27,13 @@ class DescriptorTest < MiniTest::Test
     result = RestClientWrapper.get File.join($host, "compound/descriptor", bsonid), {}, {:accept => "application/json"}
     json = JSON.parse(result)
     assert_equal json["name"], "Openbabel.HBA1"
-    assert_equal json["numeric"], true
+    assert_equal json["calculated"], true
   end
 
   def test_04_post_descriptor
     result = RestClientWrapper.post File.join($host, "compound/descriptor"), {:identifier => "CC(=O)CC(C)C#N", :descriptor => "Joelib.LogP"}, {:accept => "application/csv"}
     assert_equal result.code, 200
-    assert_equal "SMILES,CC(=O)CC(C)C#N\n\"Joelib.LogP\",2.65908", result
+    assert_equal "SMILES,\"CC(=O)CC(C)C#N\"\n\"Joelib.LogP\",2.65908", result
   end
 
   # currently not applicable

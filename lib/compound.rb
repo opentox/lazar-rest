@@ -23,14 +23,14 @@ post "/compound/descriptor/?" do
   descriptors.each do |descriptor|
     physchem_descriptors << PhysChem.find_by(:name => descriptor)
   end
-  result = compound.physchem physchem_descriptors
-  csv = result.collect{|k,v| "\"#{PhysChem.find(k).name}\",#{v}" }.join("\n")
-  csv = "SMILES,#{params[:identifier]}\n#{csv}" if params[:identifier]
+  result = compound.calculate_properties physchem_descriptors
+  csv = (0..result.size-1).collect{|i| "\"#{physchem_descriptors[i].name}\",#{result[i]}"}.join("\n")
+  csv = "SMILES,\"#{params[:identifier]}\"\n#{csv}" if params[:identifier]
   case @accept
   when "text/csv","application/csv"
     return csv
   when "application/json"
-    result_hash = result.collect{|k,v|  {"#{PhysChem.find(k).name}" => "#{v}"}}  # result.collect{|k,v| "\"#{PhysChem.find(k).name}\"" => "#{v}"}.join(",")
+    result_hash = (0..result.size-1).collect{|i| {"#{physchem_descriptors[i].name}" => "#{result[i]}"}}
     data = {"compound" => {"SMILES" => "#{params[:identifier]}"}}
     data["compound"]["InChI"] = "#{compound.inchi}" if compound.inchi
     data["compound"]["results"] = result_hash

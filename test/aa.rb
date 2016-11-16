@@ -2,6 +2,10 @@ require_relative "setup.rb"
 
 class AATest < MiniTest::Test
 
+  def self.test_order
+    :alpha
+  end
+
   def test_0_login
     res = RestClientWrapper.post(File.join($host,"aa/authenticate"),{:username=>"guest", :password => "guest"},{:Accept => "text/plain"})
     assert_equal res.code, 200
