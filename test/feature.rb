@@ -22,7 +22,7 @@ class ModelTest < MiniTest::Test
     res = RestClientWrapper.get uri, {}, {:accept => "application/json"}
     json = JSON.parse(res.body)
     assert_equal Feature.last.id.to_s, json["_id"]["$oid"]
-    assert_equal Feature.last.category == json["category"]
+    assert_equal Feature.last.category, json["category"]
   end
 
   def test_01_get_400
