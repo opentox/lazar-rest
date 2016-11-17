@@ -627,7 +627,7 @@
                 "description": "Get feature representation",
                 "parameters": [
                     {
-                        "name": "acept",
+                        "name": "accept",
                         "in": "header",
                         "description": "requested Content-Type",
                         "required": true,
