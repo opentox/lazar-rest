@@ -1,3 +1,6 @@
+2016-11-18
+* adapt code to lazar 1.0.0
+* set LAZAR_ENV to RACK_ENV from unicorn 
 2016-10-20
 * License to GPL3
 2016-09-14

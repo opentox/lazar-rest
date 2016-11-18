@@ -1,6 +1,16 @@
 require "sinatra"
-require "../lazar/lib/lazar.rb"
-require "../qsar-report/lib/qsar-report.rb"
+
+# Environment setup from unicorn -E param
+ENV["LAZAR_ENV"] = ENV["RACK_ENV"]
+
+if ENV["LAZAR_ENV"] == "development"
+  require "../lazar/lib/lazar.rb"
+  require "../qsar-report/lib/qsar-report.rb"
+else
+  require "lazar"
+  require "qsar-report"
+end
+
 include OpenTox
 
 require 'rack/cors'
