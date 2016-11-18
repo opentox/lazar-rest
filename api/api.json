@@ -1036,8 +1036,8 @@
                 "tags": [
                     "authentication"
                 ],
-                "summary": "Get authentication token",
-                "description": "Authentication against OpenSSO. Returns token. Requires Username and Password.",
+                "summary": "Get token",
+                "description": "Authentication against OpenSSO. Returns authentication token. Requires Username and Password.",
                 "operationId": "login",
                 "consumes": [
                     "text/plain"
@@ -1078,7 +1078,7 @@
         "/aa/logout": {
             "post": {
                 "description": "Devalidates a token. Requires Subjectid.",
-                "summary": "Destroy Authentication token",
+                "summary": "Destroy token",
                 "operationId": "logout",
                 "tags": [
                     "authentication"
