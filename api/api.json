@@ -15,6 +15,10 @@
         }
     },
     "host": "enm.in-silico.ch",
+    "externalDocs": {
+        "description": "See also *lazar-rest* documentation on Github\n",
+        "url": "https://github.com/opentox/lazar-rest"
+    },
     "basePath": "/",
     "schemes": [
         "https"
