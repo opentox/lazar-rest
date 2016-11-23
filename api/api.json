@@ -1180,12 +1180,12 @@
             "description": "Descriptor"
         },
         {
-            "name": "model",
-            "description": "Lazar Model Service"
+            "name": "feature",
+            "description": "Feature"
         },
         {
-            "name": "compound",
-            "description": "Compound"
+            "name": "model",
+            "description": "Lazar Model Service"
         },
         {
             "name": "dataset",
@@ -1196,20 +1196,20 @@
             "description": "Validation"
         },
         {
+            "name": "report",
+            "description": "QMRF Reporting"
+        },
+        {
+            "name": "compound",
+            "description": "Compound"
+        },
+        {
             "name": "substance",
             "description": "Substance"
         },
         {
             "name": "nanoparticle",
             "description": "Nanoparticle"
-        },
-        {
-            "name": "feature",
-            "description": "Feature"
-        },
-        {
-            "name": "report",
-            "description": "QMRF Reporting"
         }
     ]
 }
