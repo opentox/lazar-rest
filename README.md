@@ -26,8 +26,8 @@ In development environment use lazar and qsar-report library from source
 In production environment change this to the following to have lazar and qsar-report library from ruby gem
 
 ```ruby
-    require "../lazar/lib/lazar.rb"
-    require "../qsar-report/lib/qsar-report.rb"
+    require "lazar"
+    require "qsar-report"
 ```
 
 start the service with unicorn on an assigned port
