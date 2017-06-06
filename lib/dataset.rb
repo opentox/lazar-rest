@@ -22,8 +22,14 @@ get "/dataset/:id/?" do
   resource_not_found_error "Dataset with id: #{params[:id]} not found." unless dataset
   case @accept
   when "application/json"
-    dataset.data_entries.each do |k, v|
-      dataset.data_entries[k][:URI] = uri("/substance/#{k}")
+    if dataset.data_entries.class == Array
+      dataset.data_entries.each do |k|
+        #todo: fix
+      end
+    else
+      dataset.data_entries.each do |k, v|
+        dataset.data_entries["#{k}"][:URI] = uri("/substance/#{k}")
+      end
     end
     dataset[:URI] = uri("/dataset/#{dataset.id}")
     dataset[:substances] = uri("/dataset/#{dataset.id}/substances")

@@ -83,13 +83,13 @@ get "/report/:id/?" do
   report.value "algorithm_type", "#{model_type}"
 
   # Explicit algorithm 4.2
-  report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "Neighbor algorithm: #{model.neighbor_algorithm.gsub('_',' ').titleize}#{(model.neighbor_algorithm_parameters[:min_sim] ? ' with similarity > ' + model.neighbor_algorithm_parameters[:min_sim].to_s : '')}"}
-  report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
+  #report.change_catalog :algorithms_catalog, :algorithms_catalog_1, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "Neighbor algorithm: #{model.neighbor_algorithm.gsub('_',' ').titleize}#{(model.neighbor_algorithm_parameters[:min_sim] ? ' with similarity > ' + model.neighbor_algorithm_parameters[:min_sim].to_s : '')}"}
+  #report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_1
   report.change_catalog :algorithms_catalog, :algorithms_catalog_3, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "modified k-nearest neighbor #{model_type}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_3
-  if model.prediction_algorithm_parameters
-    pred_algorithm_params = (model.prediction_algorithm_parameters[:method] == "rf" ? "random forest" : model.prediction_algorithm_parameters[:method])
-  end
+  #if model.prediction_algorithm_parameters
+  #  pred_algorithm_params = (model.prediction_algorithm_parameters[:method] == "rf" ? "random forest" : model.prediction_algorithm_parameters[:method])
+  #end
   report.change_catalog :algorithms_catalog, :algorithms_catalog_2, {:definition => "see Helma 2016 and lazar.in-silico.ch, submitted version: #{lazar_commit}", :description => "Prediction algorithm: #{model.prediction_algorithm.gsub('OpenTox::Algorithm::','').gsub('_',' ').gsub('.', ' with ')} #{(pred_algorithm_params ? pred_algorithm_params : '')}"}
   report.ref_catalog :algorithm_explicit, :algorithms_catalog, :algorithms_catalog_2
 
