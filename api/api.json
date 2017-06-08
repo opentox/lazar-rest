@@ -2,19 +2,19 @@
     "swagger": "2.0",
     "info": {
         "description": "REST API webservice for lazar and nano-lazar. \n*lazar* (lazy structure–activity relationships) is a modular framework for predictive toxicology. With activated Authentication & Authorization, subjectid authorization token are obligatory for designated services.\n",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "title": "Lazar & Nano-Lazar REST Service",
         "contact": {
             "name": "in silico toxicology gmbh",
             "email": "service@in-silico.ch",
-            "url": "www.in-silico.ch"
+            "url": "https://in-silico.ch"
         },
         "license": {
             "name": "GNU GENERAL PUBLIC LICENSE",
             "url": "https://github.com/opentox/lazar-rest/blob/master/LICENSE"
         }
     },
-    "host": "enm.in-silico.ch",
+    "host": "api.in-silico.ch",
     "externalDocs": {
         "description": "See also *lazar-rest* documentation on Github\n",
         "url": "https://github.com/opentox/lazar-rest"
