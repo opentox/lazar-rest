@@ -2,7 +2,7 @@
 # @param [Header] Accept one of text/uri-list,
 # @return [text/uri-list] list of all prediction models
 get "/report/?" do
-  models = Model::Validation.all
+  models = Model::Prediction.all
   case @accept
   when "text/uri-list"
     uri_list = models.collect{|model| uri("/report/#{model.model_id}")}
@@ -26,7 +26,7 @@ end
 get "/report/:id/?" do
   model = Model::Lazar.find params[:id]
   resource_not_found_error "Model with id: #{params[:id]} not found." unless model
-  prediction_model = Model::Validation.find_by :model_id => params[:id]
+  prediction_model = Model::Prediction.find_by :model_id => params[:id]
   validation_template = File.join(File.dirname(__FILE__),"../views/model_details.haml")
 
   if File.directory?("#{File.dirname(__FILE__)}/../../lazar")

@@ -3,7 +3,7 @@
 # @param [Header] Accept one of text/uri-list,
 # @return [text/uri-list] list of all prediction models
 get "/model/?" do
-  models = Model::Validation.all
+  models = Model::Prediction.all
   case @accept
   when "text/uri-list"
     uri_list = models.collect{|model| uri("/model/#{model.model_id}")}
