@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = "lazar-rest"
   s.version     = File.read("./VERSION")
   s.authors     = ["Christoph Helma","Micha Rautenberg","Denis Gebele"]
-  s.email       = ["supprot@in-silico.ch"]
+  s.email       = ["support@in-silico.ch"]
   s.homepage    = "http://github.com/opentox/lazar-rest"
   s.summary     = %q{lazar-rest}
   s.description = %q{REST Interface for Lazar Toxicology Predictions}
