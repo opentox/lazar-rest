@@ -18,8 +18,13 @@ end
 
 # Get a nanoparticle
 get "/nanoparticle/:id/?" do
-  nanoparticle = Nanoparticle.find :id => params[:id]
-  resource_not_found_error "Nanoparticle with id: #{params[:id]} not found." unless nanoparticle
-  nanoparticle[:URI] = uri("/nanoparticle/#{nanoparticle.id}")
-  return nanoparticle.to_json
+  case @accept
+  when "application/json"
+    nanoparticle = Nanoparticle.find :id => params[:id]
+    not_found_error "Nanoparticle with id: #{params[:id]} not found." unless nanoparticle
+    nanoparticle[:URI] = uri("/nanoparticle/#{nanoparticle.id}")
+    return nanoparticle.to_json
+  else
+    bad_request_error "Mime type #{@accept} is not supported."
+  end
 end

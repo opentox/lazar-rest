@@ -25,7 +25,7 @@ end
 
 get "/report/:id/?" do
   model = Model::Lazar.find params[:id]
-  resource_not_found_error "Model with id: #{params[:id]} not found." unless model
+  not_found_error "Model with id: #{params[:id]} not found." unless model
   prediction_model = Model::Validation.find_by :model_id => params[:id]
   validation_template = File.join(File.dirname(__FILE__),"../views/model_details.haml")
 

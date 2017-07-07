@@ -10,11 +10,9 @@ get "/model/?" do
     return uri_list.join("\n") + "\n"
   when "application/json"
     models = JSON.parse models.to_json
-    models.each_index do |idx|
-      models[idx][:URI] = uri("/model/#{models[idx]["model_id"]["$oid"]}")
-      models[idx][:crossvalidation_uri] = uri("/crossvalidation/#{models[idx]["crossvalidation_id"]["$oid"]}") if models[idx]["crossvalidation_id"]
-    end
-    return models.to_json
+    list = []
+    models.each{|m| list << uri("/model/#{m["model_id"]["$oid"]}")}
+    return list.to_json
   else
     bad_request_error "Mime type #{@accept} is not supported."
   end
@@ -22,7 +20,7 @@ end
 
 get "/model/:id/?" do
   model = Model::Lazar.find params[:id]
-  resource_not_found_error "Model with id: #{params[:id]} not found." unless model
+  not_found_error "Model with id: #{params[:id]} not found." unless model
   model[:URI] = uri("/model/#{model.id}")
   # model[:neighbor_algorithm_parameters][:feature_dataset_uri] = uri("/dataset/#{model[:neighbor_algorithm_parameters][:feature_dataset_id]}") if model[:neighbor_algorithm_parameters][:feature_dataset_id]
   model[:training_dataset_uri] = uri("/dataset/#{model.training_dataset_id}") if model.training_dataset_id

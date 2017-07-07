@@ -9,7 +9,7 @@ class DescriptorTest < MiniTest::Test
     result = RestClientWrapper.get File.join($host, "compound/descriptor"), {}, {:accept => "text/plain"}
     assert_equal result.code, 200
     assert result.include?("Joelib.KierShape1: JOELIb does not provide meaningful descriptions, see java/JoelibDescriptors.java for details.\nJoelib.KierShape2: JOELIb does not provide meaningful descriptions, see java/JoelibDescriptors.java for details."), "Descriptor list is not complete."
-    assert_equal 355, result.lines.count
+    assert_equal 346, result.lines.count
   end
 
   def test_01_get_descriptor

@@ -18,8 +18,13 @@ end
 
 # Get a feature
 get "/feature/:id/?" do
-  feature = Feature.find :id => params[:id]
-  resource_not_found_error "Feature with id: #{params[:id]} not found." unless feature
-  feature[:URI] = uri("/feature/#{feature.id}")
-  return feature.to_json
+  case @accept
+  when "application/json"
+    feature = Feature.find :id => params[:id]
+    not_found_error "Feature with id: #{params[:id]} not found." unless feature
+    feature[:URI] = uri("/feature/#{feature.id}")
+    return feature.to_json
+  else
+    bad_request_error "Mime type #{@accept} is not supported."
+  end
 end

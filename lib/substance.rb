@@ -18,8 +18,13 @@ end
 
 # Get a substance
 get "/substance/:id/?" do
-  substance = Substance.find :id => params[:id]
-  resource_not_found_error "Substance with id: #{params[:id]} not found." unless substance
-  substance[:URI] = uri("/substance/#{substance.id}")
-  return substance.to_json
+  case @accept
+  when "application/json"
+    substance = Substance.find :id => params[:id]
+    not_found_error "Substance with id: #{params[:id]} not found." unless substance
+    substance[:URI] = uri("/substance/#{substance.id}")
+    return substance.to_json
+  else
+    bad_request_error "Mime type #{@accept} is not supported."
+  end
 end

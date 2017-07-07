@@ -62,7 +62,7 @@ get "/validation/:validationtype/:id/?" do
     validation = Validation::RegressionCrossValidation.find params[:id]
   end
 
-  resource_not_found_error "#{params[:validationtype]} with id: #{params[:id]} not found." unless validation
+  not_found_error "#{params[:validationtype]} with id: #{params[:id]} not found." unless validation
   #model[:URI] = uri("/model/#{model.id}")
   #model[:neighbor_algorithm_parameters][:feature_dataset_uri] = uri("/dataset/#{model[:neighbor_algorithm_parameters][:feature_dataset_id]}") if model[:neighbor_algorithm_parameters][:feature_dataset_id]
   #model[:training_dataset_uri] = uri("/dataset/#{model.training_dataset_id}") if model.training_dataset_id
