@@ -7,10 +7,9 @@ get "/feature/?" do
     return uri_list.join("\n") + "\n"
   when "application/json"
     features = JSON.parse features.to_json
-    features.each_index do |idx|
-      features[idx][:URI] = uri("/feature/#{features[idx]["_id"]["$oid"]}")
-    end
-    return features.to_json
+    list = []
+    features.each{|f| list << uri("/feature/#{f["_id"]["$oid"]}")}
+    return list.to_json
   else
     bad_request_error "Mime type #{@accept} is not supported."
   end
