@@ -119,6 +119,9 @@
                     "model"
                 ],
                 "description": "Predict a compound or a nanoparticle",
+                "consumes": [
+                    "multipart/form-data"
+                ],
                 "parameters": [
                     {
                         "name": "identifier",
@@ -854,6 +857,9 @@
                 ],
                 "summary": "Descriptor calculation",
                 "description": "Calculate descriptors for a single compound as SMILES string <br>  <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"Accept:application/json\" -F \"identifier=O=C1NC(=O)NC=C1\" -F \"descriptor=Openbabel.MW,JoeLib.LogP\" https://api.in-silico.ch/compound/descriptor </pre>.",
+                "consumes": [
+                    "multipart/form-data"
+                ],
                 "parameters": [
                     {
                         "name": "Accept",
@@ -1040,7 +1046,8 @@
                 "description": "Authentication against OpenSSO. Returns authentication token. Requires Username and Password.",
                 "operationId": "login",
                 "consumes": [
-                    "text/plain"
+                    "text/plain",
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "text/plain"
@@ -1084,7 +1091,8 @@
                     "authentication"
                 ],
                 "consumes": [
-                    "text/plain"
+                    "text/plain",
+                    "multipart/form-data"
                 ],
                 "produces": [
                     "text/plain"
