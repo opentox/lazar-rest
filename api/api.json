@@ -32,17 +32,6 @@
                 "description": "Get a list of all prediction models",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
-                    },
-                    {
                         "$ref": "#/parameters/subjectid"
                     }
                 ],
@@ -75,26 +64,16 @@
                     "model"
                 ],
                 "description": "Get model representation",
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json"
-                        ]
-                    },
                     {
                         "$ref": "#/parameters/id"
                     },
                     {
                         "$ref": "#/parameters/subjectid"
                     }
-                ],
-                "produces": [
-                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -167,17 +146,6 @@
                 "description": "Get a list of QMRF reports",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
-                    },
-                    {
                         "$ref": "#/parameters/subjectid"
                     }
                 ],
@@ -209,18 +177,8 @@
                 "tags": [
                     "report"
                 ],
-                "description": "Get a QMRF report prototype",
+                "description": "Get QMRF for prediction model",
                 "parameters": [
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/xml"
-                        ]
-                    },
                     {
                         "$ref": "#/parameters/id"
                     },
@@ -258,17 +216,6 @@
                 "description": "Get a list of all datasets",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
-                    },
-                    {
                         "$ref": "#/parameters/subjectid"
                     }
                 ],
@@ -303,17 +250,6 @@
                 "description": "Get dataset representation",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json",
-                            "text/csv"
-                        ]
-                    },
-                    {
                         "$ref": "#/parameters/id"
                     },
                     {
@@ -339,6 +275,9 @@
                     },
                     "404": {
                         "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -350,16 +289,6 @@
                 ],
                 "description": "Get dataset representation",
                 "parameters": [
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json"
-                        ]
-                    },
                     {
                         "name": "attribute",
                         "in": "path",
@@ -398,6 +327,9 @@
                     },
                     "404": {
                         "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -409,17 +341,6 @@
                 ],
                 "description": "Get a list of all substances",
                 "parameters": [
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
-                    },
                     {
                         "$ref": "#/parameters/subjectid"
                     }
@@ -455,16 +376,6 @@
                 "description": "Get substance representation",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json"
-                        ]
-                    },
-                    {
                         "$ref": "#/parameters/id"
                     },
                     {
@@ -489,6 +400,9 @@
                     },
                     "404": {
                         "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -500,17 +414,6 @@
                 ],
                 "description": "Get a list of all nanoparticles",
                 "parameters": [
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
-                    },
                     {
                         "$ref": "#/parameters/subjectid"
                     }
@@ -546,16 +449,6 @@
                 "description": "Get nanoparticle representation",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json"
-                        ]
-                    },
-                    {
                         "$ref": "#/parameters/id"
                     },
                     {
@@ -580,6 +473,9 @@
                     },
                     "404": {
                         "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -589,18 +485,10 @@
                 "tags": [
                     "feature"
                 ],
-                "description": "Get a list of all features",
+                "description": "Get a list of ids for all features",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -634,17 +522,10 @@
                 "description": "Get feature representation",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json"
-                        ]
+                        "$ref": "#/parameters/id"
                     },
                     {
-                        "$ref": "#/parameters/id"
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -665,6 +546,9 @@
                     },
                     "404": {
                         "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -677,15 +561,7 @@
                 "description": "Get a list of all validation types",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -719,17 +595,6 @@
                 "description": "Get all validations of a validation type",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/uri-list",
-                            "application/json"
-                        ]
-                    },
-                    {
                         "$ref": "#/parameters/valtype"
                     },
                     {
@@ -755,6 +620,9 @@
                     },
                     "404": {
                         "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -766,16 +634,6 @@
                 ],
                 "description": "Get validation representation",
                 "parameters": [
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json"
-                        ]
-                    },
                     {
                         "$ref": "#/parameters/valtype"
                     },
@@ -804,6 +662,9 @@
                     },
                     "404": {
                         "$ref": "#/responses/404"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -817,19 +678,11 @@
                 "description": "Get a list of all descriptors",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/plain",
-                            "application/json"
-                        ]
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
-                    "text/plain",
+                    "text/plain; charset=utf-8",
                     "application/json"
                 ],
                 "responses": {
@@ -861,18 +714,6 @@
                     "multipart/form-data"
                 ],
                 "parameters": [
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/csv",
-                            "application/json"
-                        ],
-                        "default": "text/csv"
-                    },
                     {
                         "name": "identifier",
                         "in": "formData",
@@ -926,26 +767,18 @@
                 "description": "Get a list of a descriptors",
                 "parameters": [
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-Type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "text/plain",
-                            "application/json"
-                        ]
-                    },
-                    {
                         "name": "descriptor",
                         "in": "path",
                         "description": "descriptor name or ID",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
-                    "text/plain",
+                    "text/plain; charset=utf-8",
                     "application/json"
                 ],
                 "responses": {
@@ -978,21 +811,7 @@
                         "$ref": "#/parameters/InChI"
                     },
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "requested Content-type",
-                        "required": true,
-                        "type": "string",
-                        "enum": [
-                            "application/json",
-                            "chemical/x-daylight-smiles",
-                            "chemical/x-inchi",
-                            "chemical/x-mdl-sdfile",
-                            "chemical/x-mdl-molfile",
-                            "image/png",
-                            "image/svg+xml",
-                            "text/plain"
-                        ]
+                        "$ref": "#/parameters/subjectid"
                     }
                 ],
                 "produces": [
@@ -1046,11 +865,11 @@
                 "description": "Authentication against OpenSSO. Returns authentication token. Requires Username and Password.",
                 "operationId": "login",
                 "consumes": [
-                    "text/plain",
+                    "text/plain; charset=utf-8",
                     "multipart/form-data"
                 ],
                 "produces": [
-                    "text/plain"
+                    "text/plain; charset=utf-8"
                 ],
                 "parameters": [
                     {
@@ -1078,6 +897,9 @@
                     },
                     "401": {
                         "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -1091,11 +913,11 @@
                     "authentication"
                 ],
                 "consumes": [
-                    "text/plain",
+                    "text/plain; charset=utf-8",
                     "multipart/form-data"
                 ],
                 "produces": [
-                    "text/plain"
+                    "text/plain; charset=utf-8"
                 ],
                 "parameters": [
                     {
@@ -1115,6 +937,9 @@
                     },
                     "401": {
                         "$ref": "#/responses/401"
+                    },
+                    "500": {
+                        "$ref": "#/responses/500"
                     }
                 }
             }
@@ -1148,11 +973,17 @@
             "description": "authorization token",
             "required": false,
             "type": "string"
+        },
+        "subjectidRequired": {
+            "in": "header",
+            "name": "subjectid",
+            "description": "authorization token",
+            "required": true,
+            "type": "string"
         }
     },
     "responses": {
         "200": {
-            "schema": {"type":"string"},
             "description": "OK"
         },
         "400": {
@@ -1173,16 +1004,24 @@
     },
     "tags": [
         {
-            "name": "algorithm",
-            "description": "Algorithm"
-        },
-        {
             "name": "api",
             "description": "Swagger API representation in JSON"
         },
         {
+            "name": "algorithm",
+            "description": "Algorithm"
+        },
+        {
             "name": "authentication",
             "description": "minimal Authentication service"
+        },
+        {
+            "name": "compound",
+            "description": "Compound"
+        },
+        {
+            "name": "dataset",
+            "description": "Dataset"
         },
         {
             "name": "descriptor",
@@ -1197,28 +1036,20 @@
             "description": "Lazar Model Service"
         },
         {
-            "name": "dataset",
-            "description": "Dataset"
-        },
-        {
-            "name": "validation",
-            "description": "Validation"
+            "name": "nanoparticle",
+            "description": "Nanoparticle"
         },
         {
             "name": "report",
             "description": "QMRF Reporting"
         },
         {
-            "name": "compound",
-            "description": "Compound"
-        },
-        {
             "name": "substance",
             "description": "Substance"
         },
         {
-            "name": "nanoparticle",
-            "description": "Nanoparticle"
+            "name": "validation",
+            "description": "Validation"
         }
     ]
 }

@@ -3,6 +3,7 @@ require "sinatra/reloader"
 require 'sinatra/cross_origin'
 
 configure do
+  $logger = Logger.new(STDOUT)
   enable :reloader #if development?
   enable :cross_origin
   disable :show_exceptions
