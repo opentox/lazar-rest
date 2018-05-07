@@ -709,7 +709,7 @@
                     "descriptor"
                 ],
                 "summary": "Descriptor calculation",
-                "description": "Calculate descriptors for a single compound as SMILES string <br>  <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"Accept:application/json\" -F \"identifier=O=C1NC(=O)NC=C1\" -F \"descriptor=Openbabel.MW,JoeLib.LogP\" https://api.in-silico.ch/compound/descriptor </pre>.",
+                "description": "Calculate descriptors for a single compound as SMILES string <br>  <strong>curl example:</strong> <pre>curl -Lk -X POST -i  -H \"Accept:application/json\" -F \"identifier=O=C1NC(=O)NC=C1\" -F \"descriptor=Openbabel.MW,Openbabel.atoms\" https://api.in-silico.ch/compound/descriptor </pre>.",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -724,12 +724,9 @@
                     {
                         "name": "descriptor",
                         "in": "formData",
-                        "description": "array of descriptors",
+                        "description": "list of comma seperated descriptors",
                         "required": true,
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/subjectid"
