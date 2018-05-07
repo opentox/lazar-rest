@@ -11,7 +11,7 @@ get "/model/?" do
   when "application/json"
     models = JSON.parse models.to_json
     list = []
-    models.each{|m| list << uri("/model/#{m["model_id"]["$oid"]}")}
+    models.each{|m| list << uri("/model/#{m["_id"]["$oid"]}")}
     return list.to_json
   else
     bad_request_error "Mime type #{@accept} is not supported."
