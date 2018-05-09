@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.0",
-  "x-orn-@id": "https://dg-lazar.prod.openrisknet.org",
+  "x-orn-@id": "https://lazar.prod.openrisknet.org",
   "x-orn-@type": "x-orn:Service",
   "servers": [
     {
-      "url": "https://dg-lazar.prod.openrisknet.org/"
+      "url": "https://lazar.prod.openrisknet.org/"
     }
   ],
   "info": {
@@ -29,7 +29,7 @@
     "/model": {
       "get": {
         "x-orn-@type": "x-orn:Model",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/model",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/model",
         "x-orn:method": "Get",
         "tags": [
           "model"
@@ -62,7 +62,7 @@
     "/model/{id}": {
       "get": {
         "x-orn-@type": "x-orn:Model",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/model",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/model",
         "x-orn:method": "Get",
         "tags": [
           "model"
@@ -96,7 +96,7 @@
       },
       "post": {
         "x-orn-@type": "x-orn:Prediction",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/model/{id}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/model/{id}",
         "x-orn:method": "Post",
         "tags": [
           "model"
@@ -144,7 +144,7 @@
     "/report": {
       "get": {
         "x-orn-@type": "x-orn:Report",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/report",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/report",
         "x-orn:method": "Get",
         "tags": [
           "report"
@@ -177,7 +177,7 @@
     "/report/{id}": {
       "get": {
         "x-orn-@type": "x-orn:Report",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/report/{id}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/report/{id}",
         "x-orn:method": "Get",
         "tags": [
           "report"
@@ -213,7 +213,7 @@
     "/dataset": {
       "get": {
         "x-orn-@type": "x-orn:Dataset",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/dataset",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/dataset",
         "x-orn:method": "Get",
         "tags": [
           "dataset"
@@ -246,7 +246,7 @@
     "/dataset/{id}": {
       "get": {
         "x-orn-@type": "x-orn:Dataset",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/dataset/{id}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/dataset/{id}",
         "x-orn:method": "Get",
         "tags": [
           "dataset"
@@ -285,7 +285,7 @@
     "/dataset/{id}/{attribute}": {
       "get": {
         "x-orn-@type": "x-orn:Dataset",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/dataset/{id}/{attribute}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/dataset/{id}/{attribute}",
         "x-orn:method": "Get",
         "tags": [
           "dataset"
@@ -339,7 +339,7 @@
     "/substance": {
       "get": {
         "x-orn-@type": "x-orn:Substance",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/substance",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/substance",
         "x-orn:method": "Get",
         "tags": [
           "substance"
@@ -372,7 +372,7 @@
     "/substance/{id}": {
       "get": {
         "x-orn-@type": "x-orn:Substance",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/substance/{id}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/substance/{id}",
         "x-orn:method": "Get",
         "tags": [
           "substance"
@@ -411,7 +411,7 @@
     "/nanoparticle": {
       "get": {
         "x-orn-@type": "x-orn:Nanoparticle",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/nanoparticle",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/nanoparticle",
         "x-orn:method": "Get",
         "tags": [
           "nanoparticle"
@@ -444,7 +444,7 @@
     "/nanoparticle/{id}": {
       "get": {
         "x-orn-@type": "x-orn:Nanoparticle",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/nanoparticle/{id}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/nanoparticle/{id}",
         "x-orn:method": "Get",
         "tags": [
           "nanoparticle"
@@ -483,7 +483,7 @@
     "/feature": {
       "get": {
         "x-orn-@type": "x-orn:Feature",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/feature",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/feature",
         "x-orn:method": "Get",
         "tags": [
           "feature"
@@ -516,7 +516,7 @@
     "/feature/{id}": {
       "get": {
         "x-orn-@type": "x-orn:Feature",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/feature/{id}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/feature/{id}",
         "x-orn:method": "Get",
         "tags": [
           "feature"
@@ -555,7 +555,7 @@
     "/validation": {
       "get": {
         "x-orn-@type": "x-orn:Validation",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/validation",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/validation",
         "x-orn:method": "Get",
         "tags": [
           "validation"
@@ -588,7 +588,7 @@
     "/validation/{validationtype}": {
       "get": {
         "x-orn-@type": "x-orn:Validation",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/validation/{validationtype}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/validation/{validationtype}",
         "x-orn:method": "Get",
         "tags": [
           "validation"
@@ -627,7 +627,7 @@
     "/validation/{validationtype}/{id}": {
       "get": {
         "x-orn-@type": "x-orn:Validation",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/validation/{validationtype}/{id}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/validation/{validationtype}/{id}",
         "x-orn:method": "Get",
         "tags": [
           "validation"
@@ -669,7 +669,7 @@
     "/compound/descriptor": {
       "get": {
         "x-orn-@type": "x-orn:Descriptor",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/compound/descriptor",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/compound/descriptor",
         "x-orn:method": "Get",
         "tags": [
           "compound",
@@ -701,7 +701,7 @@
       },
       "post": {
         "x-orn-@type": "x-orn:Prediction",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/compound/descriptor",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/compound/descriptor",
         "x-orn:method": "Post",
         "tags": [
           "compound",
@@ -748,7 +748,7 @@
     "/compound/descriptor/{descriptor}": {
       "get": {
         "x-orn-@type": "x-orn:Descriptor",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/compound/descriptor/{descriptor}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/compound/descriptor/{descriptor}",
         "x-orn:method": "Get",
         "tags": [
           "compound",
@@ -791,7 +791,7 @@
     "/compound/{InChI}": {
       "get": {
         "x-orn-@type": "x-orn:Compound",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/compound/{InChI}",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/compound/{InChI}",
         "x-orn:method": "Get",
         "tags": [
           "compound"
@@ -837,7 +837,7 @@
     "/aa/authenticate": {
       "post": {
         "x-orn-@type": "x-orn:Authentication",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/aa/authenticate",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/aa/authenticate",
         "x-orn:method": "Post",
         "tags": [
           "authentication"
@@ -876,7 +876,7 @@
     "/aa/logout": {
       "post": {
         "x-orn-@type": "x-orn:Authentication",
-        "x-orn:path": "https://dg-lazar.prod.openrisknet.org/aa/logout",
+        "x-orn:path": "https://lazar.prod.openrisknet.org/aa/logout",
         "x-orn:method": "Post",
         "description": "Devalidates a token. Requires Subjectid.",
         "summary": "Destroy token",
