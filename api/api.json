@@ -2,6 +2,12 @@
   "openapi": "3.0.0",
   "x-orn-@id": "https://lazar.prod.openrisknet.org",
   "x-orn-@type": "x-orn:Service",
+  "x-orn-@context": {
+    "@vocab": "http://openrisknet.org/schema#",
+    "x-orn": "http://openrisknet.org/schema#",
+    "x-orn-@id": "@id",
+    "x-orn-@type": "@type"
+  },
   "servers": [
     {
       "url": "https://lazar.prod.openrisknet.org/"
